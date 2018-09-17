@@ -32,6 +32,9 @@ export function reducer(state = initialState, action: actions.All): State {
       const options = [...state.options, action.option];
       return tassign(state, { options });
     }
+    case actions.CLEAR: {
+      return initialState;
+    }
     default: {
       return state;
     }
