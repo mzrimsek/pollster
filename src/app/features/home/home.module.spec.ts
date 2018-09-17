@@ -7,7 +7,7 @@ describe('HomeModule', () => {
     homeModule = new HomeModule();
   });
 
-  it('should create an instance', () => {
+  it('Should create an instance', () => {
     expect(homeModule).toBeTruthy();
   });
 });
