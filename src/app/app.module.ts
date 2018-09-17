@@ -10,6 +10,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CreateModule } from './features/create/create.module';
+import { HomeModule } from './features/home/home.module';
 
 import { AppComponent } from './app.component';
 
@@ -31,7 +33,9 @@ import { environment } from '../environments/environment';
       stateKey: 'router'
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    HomeModule,
+    CreateModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
   bootstrap: [AppComponent]
