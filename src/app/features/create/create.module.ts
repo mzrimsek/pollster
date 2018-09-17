@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
 
+import { AddOptionComponent } from './components/add-option/add-option.component';
 import { CreateComponent } from './create.component';
 
 import { PollService } from '../../shared/services/poll.service';
@@ -12,7 +13,7 @@ import { PollService } from '../../shared/services/poll.service';
     CommonModule,
     SharedModule
   ],
-  declarations: [CreateComponent],
-  providers: [PollService]
+  declarations: [CreateComponent, AddOptionComponent],
+  providers: [PollService],
 })
 export class CreateModule { }
