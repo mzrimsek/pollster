@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PollService } from '../../shared/services/poll.service';
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
+import createSelectors, { State } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-create',
@@ -9,12 +13,10 @@ import { PollService } from '../../shared/services/poll.service';
 })
 export class CreateComponent implements OnInit {
 
-  options: string[] = [];
-  constructor(private pollService: PollService) { }
+  options: Observable<string[]>;
+  constructor(private store: Store<State>) { }
 
-  ngOnInit() { }
-
-  addOption(option: string) {
-    this.options.push(option);
+  ngOnInit() {
+    this.options = this.store.select(createSelectors.options);
   }
 }

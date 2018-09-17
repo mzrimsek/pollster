@@ -2,7 +2,7 @@
   <app-create-add-option></app-create-add-option>
   <div class="options">
     <ul>
-      <li *ngFor="let option of options">{{ option }}</li>
+      <li *ngFor="let option of (options | async)">{{ option }}</li>
     </ul>
   </div>
 </div>
