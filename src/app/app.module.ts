@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { CreateModule } from './features/create/create.module';
 import { HomeModule } from './features/home/home.module';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 
@@ -26,6 +27,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
