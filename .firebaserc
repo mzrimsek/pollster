@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "prod": "pollster",
+    "dev": "pollster-dev"
+  }
+}
