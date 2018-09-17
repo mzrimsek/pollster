@@ -1,6 +1,6 @@
 {
   "projects": {
-    "prod": "pollster",
+    "prod": "pollster-c2f56",
     "dev": "pollster-dev"
   }
 }
