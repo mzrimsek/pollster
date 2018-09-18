@@ -41,7 +41,8 @@ describe('PollService', () => {
       },
       selectionMode: 'SINGLE',
       createdAt: 10000,
-      createdBy: 'Anonymous'
+      createdBy: 'Anonymous',
+      validUntil: null
     };
 
     it('Should call collection add', () => {
@@ -66,7 +67,8 @@ const testPollItem: FirestorePollItem = {
   },
   selectionMode: 'SINGLE',
   createdAt: 0,
-  createdBy: 'Anonymous'
+  createdBy: 'Anonymous',
+  validUntil: null
 };
 
 const documentStub = {
