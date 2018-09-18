@@ -1,0 +1,4 @@
+<div class="vote"
+     *ngIf="poll">
+  {{ poll.title }} by {{ poll.createdBy }} on {{ poll.createdAt | date:'short' }}
+</div>

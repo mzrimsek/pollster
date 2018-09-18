@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Actions, Effect } from '@ngrx/effects';
 
@@ -13,7 +14,7 @@ import * as createPollActions from '../actions/create-poll.actions';
 @Injectable()
 export class CreatePollEffects {
 
-  constructor(private actions$: Actions, private pollService: PollService) { }
+  constructor(private actions$: Actions, private pollService: PollService, private router: Router) { }
 
   @Effect() save$ =
     this.actions$
@@ -23,8 +24,8 @@ export class CreatePollEffects {
         map(action => action.poll),
         switchMap(poll => this.pollService.savePoll(poll)
           .pipe(
-            map(_pollId => {
-              // route to new poll
+            map(pollId => {
+              this.router.navigate([`/poll/${pollId}`]);
               return new createPollActions.Clear();
             }),
             catchError(err => of(new appActions.Error(createPollActions.SAVE, err.message))))));

@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { CreateModule } from './features/create/create.module';
 import { HomeModule } from './features/home/home.module';
+import { PollModule } from './features/poll/poll.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { environment } from '../environments/environment';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     HomeModule,
-    CreateModule
+    CreateModule,
+    PollModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
   bootstrap: [AppComponent]
