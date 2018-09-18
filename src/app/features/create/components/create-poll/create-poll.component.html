@@ -18,10 +18,13 @@
 
   <div class="options">
     <ul>
-      <li *ngFor="let option of info.options">
+      <li class="option"
+          *ngFor="let option of info.options">
         <div class="value">{{ option.value }}</div>
         <button (click)="removeOption(option.id)">Remove</button>
       </li>
     </ul>
   </div>
+
+  <button (click)="save()">Save</button>
 </div>

@@ -6,6 +6,7 @@ import * as actions from '../../actions/create-poll.actions';
 
 import { State } from '../../reducers/root.reducer';
 
+import { Poll } from '../../../../shared/models';
 import { CreatePollInfo } from '../../models';
 
 @Component({
@@ -36,5 +37,22 @@ export class CreatePollComponent implements OnInit {
 
   removeOption(optionId: number) {
     this.store.dispatch(new actions.RemoveOption(optionId));
+  }
+
+  save() {
+    const optionsRecord: Record<string, number> = {};
+    this.info.options.forEach((option) => {
+      optionsRecord[option.value] = 0;
+    });
+
+    const poll: Poll = {
+      title: this.info.title,
+      selectionMode: this.info.selectionMode,
+      validUntil: this.info.validUntil,
+      options: optionsRecord,
+      createdAt: new Date().getUTCDate(),
+      createdBy: 'Anonymous'
+    };
+    this.store.dispatch(new actions.Save(poll));
   }
 }

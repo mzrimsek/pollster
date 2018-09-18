@@ -29,13 +29,19 @@ export class SetMode implements Action {
 export const SET_VALID_UNTIL = '[Create Poll] Set Valid Until';
 export class SetValidUntil implements Action {
   readonly type = SET_VALID_UNTIL;
-  constructor(public time: number) { }
+  constructor(public time: number | null) { }
 }
 
 export const SAVE = '[Create Poll] Save';
 export class Save implements Action {
   readonly type = SAVE;
   constructor(public poll: Poll) { }
+}
+
+export const SAVE_SUCCEEDED = '[Create Poll] Save Succeeded';
+export class SaveSucceeded implements Action {
+  readonly type = SAVE_SUCCEEDED;
+  constructor(public pollId: string) { }
 }
 
 export const CLEAR = '[Create Poll] Clear';
@@ -50,4 +56,5 @@ export type All = SetTitle |
   SetMode |
   SetValidUntil |
   Save |
+  SaveSucceeded |
   Clear;
