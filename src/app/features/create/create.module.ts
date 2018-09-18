@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { AddOptionComponent } from './components/add-option/add-option.component';
+import { CreatePollComponent } from './components/create-poll/create-poll.component';
 import { CreateComponent } from './create.component';
 
 import { PollService } from '../../shared/services/poll.service';
@@ -20,7 +20,7 @@ import { reducers } from './reducers/root.reducer';
     StoreModule.forFeature('create', reducers),
     EffectsModule.forFeature([])
   ],
-  declarations: [CreateComponent, AddOptionComponent],
+  declarations: [CreateComponent, CreatePollComponent],
   providers: [PollService],
 })
 export class CreateModule { }

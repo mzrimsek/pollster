@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import createSelectors, { State } from './reducers/root.reducer';
 
+import { CreatePollInfo } from './models';
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -13,10 +15,10 @@ import createSelectors, { State } from './reducers/root.reducer';
 })
 export class CreateComponent implements OnInit {
 
-  options: Observable<string[]>;
+  createPollInfo$: Observable<CreatePollInfo>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    this.options = this.store.select(createSelectors.options);
+    this.createPollInfo$ = this.store.select(createSelectors.createPollInfo);
   }
 }

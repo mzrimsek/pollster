@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddOptionComponent } from './add-option.component';
+import { CreatePollComponent } from './create-poll.component';
 
-describe('AddOptionComponent', () => {
-  let component: AddOptionComponent;
-  let fixture: ComponentFixture<AddOptionComponent>;
+describe('CreatePollComponent', () => {
+  let component: CreatePollComponent;
+  let fixture: ComponentFixture<CreatePollComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddOptionComponent ]
+      declarations: [ CreatePollComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddOptionComponent);
+    fixture = TestBed.createComponent(CreatePollComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

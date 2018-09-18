@@ -2,6 +2,8 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 
 import * as fromCreatePoll from './create-poll.reducer';
 
+import { CreatePollInfo } from '../models';
+
 export interface CreateState {
   createPoll: fromCreatePoll.State;
 }
@@ -17,16 +19,18 @@ export const reducers: ActionReducerMap<CreateState, any> = {
 export const _selectCreateState = createFeatureSelector<CreateState>('create');
 export const _selectCreatePoll = createSelector(_selectCreateState, state => state.createPoll);
 
-export const _selectOptions = createSelector(_selectCreatePoll, createPoll => createPoll.options);
-export const _selectTitle = createSelector(_selectCreatePoll, createPoll => createPoll.title);
-export const _selectMode = createSelector(_selectCreatePoll, createPoll => createPoll.selectionMode);
-export const _selectValidUntil = createSelector(_selectCreatePoll, createPoll => createPoll.validUntil);
+export const { selectAll: _selectOptions } = fromCreatePoll.adapter.getSelectors(_selectCreatePoll);
+export const _selectCreatePollInfo = createSelector(_selectCreatePoll, _selectOptions, (createPoll, options) => {
+  return <CreatePollInfo>{
+    title: createPoll.title,
+    selectionMode: createPoll.selectionMode,
+    validUntil: createPoll.validUntil,
+    options
+  };
+});
 
 const createSelectors = {
-  options: _selectOptions,
-  title: _selectTitle,
-  mode: _selectMode,
-  validUntil: _selectValidUntil
+  createPollInfo: _selectCreatePollInfo
 };
 
 export default createSelectors;

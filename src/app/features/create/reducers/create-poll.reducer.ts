@@ -1,20 +1,25 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+
 import * as actions from '../actions/create-poll.actions';
 
-import { SelectionMode } from '../../../shared/models';
+let id = 1;
+export interface OptionEntity {
+  id: string;
+  value: string;
+}
 
-export interface State {
+export interface State extends EntityState<OptionEntity> {
   title: string;
-  options: string[];
-  selectionMode: SelectionMode;
+  selectionMode: string;
   validUntil: number | null;
 }
 
-const initialState: State = {
+export const adapter: EntityAdapter<OptionEntity> = createEntityAdapter<OptionEntity>();
+const initialState: State = adapter.getInitialState({
   title: '',
-  options: [],
   selectionMode: 'SINGLE',
   validUntil: null
-};
+});
 
 export function reducer(state = initialState, action: actions.All): State {
   switch (action.type) {
@@ -37,11 +42,13 @@ export function reducer(state = initialState, action: actions.All): State {
       };
     }
     case actions.ADD_OPTION: {
-      const options = [...state.options, action.option];
-      return {
-        ...state,
-        options
-      };
+      return adapter.addOne({
+        id: `${id++}`,
+        value: action.option
+      }, state);
+    }
+    case actions.REMOVE_OPTION: {
+      return adapter.removeOne(action.optionId, state);
     }
     case actions.CLEAR: {
       return initialState;
