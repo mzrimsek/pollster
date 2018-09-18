@@ -82,7 +82,7 @@ describe('CreatePollComponent', () => {
     it('Should dispatch AddOption', () => {
       optionInput.value = 'Some Option';
       addOptionButton.click();
-      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.AddOption('Some Option'));
+      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.AddOption(1, 'Some Option'));
     });
 
     it('Should reset option input', () => {

@@ -17,12 +17,17 @@ describe('Create Poll Actions', () => {
 
   describe('AddOption', () => {
     it('Should have correct type', () => {
-      const action = new actions.AddOption('');
+      const action = new actions.AddOption(0, '');
       expect(action.type).toBe(actions.ADD_OPTION);
     });
 
+    it('Should have correct id', () => {
+      const action = new actions.AddOption(12, '');
+      expect(action.id).toBe(12);
+    });
+
     it('Should have correct option', () => {
-      const action = new actions.AddOption('Some Option');
+      const action = new actions.AddOption(0, 'Some Option');
       expect(action.option).toBe('Some Option');
     });
   });

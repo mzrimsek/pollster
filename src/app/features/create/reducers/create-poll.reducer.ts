@@ -2,7 +2,6 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as actions from '../actions/create-poll.actions';
 
-let id = 1;
 export interface OptionEntity {
   id: number;
   value: string;
@@ -19,7 +18,6 @@ const initialState: State = adapter.getInitialState({
   title: '',
   selectionMode: 'SINGLE',
   validUntil: null,
-  newPollId: ''
 });
 
 export function reducer(state = initialState, action: actions.All): State {
@@ -44,7 +42,7 @@ export function reducer(state = initialState, action: actions.All): State {
     }
     case actions.ADD_OPTION: {
       return adapter.addOne({
-        id: id++,
+        id: action.id,
         value: action.option
       }, state);
     }
@@ -52,7 +50,6 @@ export function reducer(state = initialState, action: actions.All): State {
       return adapter.removeOne(action.optionId, state);
     }
     case actions.CLEAR: {
-      id = 1;
       return initialState;
     }
     default: {

@@ -11,7 +11,7 @@ export class SetTitle implements Action {
 export const ADD_OPTION = '[Create Poll] Add Option';
 export class AddOption implements Action {
   readonly type = ADD_OPTION;
-  constructor(public option: string) { }
+  constructor(public id: number, public option: string) { }
 }
 
 export const REMOVE_OPTION = '[Create Poll] Remove Option';

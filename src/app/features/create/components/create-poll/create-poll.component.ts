@@ -18,6 +18,7 @@ import { CreatePollInfo } from '../../models';
 export class CreatePollComponent implements OnInit {
 
   @Input() info: CreatePollInfo;
+  private optionId = 1;
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
@@ -30,7 +31,7 @@ export class CreatePollComponent implements OnInit {
 
   addOption(addOptionEl: HTMLInputElement) {
     if (addOptionEl.value) {
-      this.store.dispatch(new actions.AddOption(addOptionEl.value));
+      this.store.dispatch(new actions.AddOption(this.optionId++, addOptionEl.value));
       addOptionEl.value = '';
     }
   }
