@@ -4,7 +4,7 @@ import * as actions from '../actions/create-poll.actions';
 
 let id = 1;
 export interface OptionEntity {
-  id: string;
+  id: number;
   value: string;
 }
 
@@ -43,7 +43,7 @@ export function reducer(state = initialState, action: actions.All): State {
     }
     case actions.ADD_OPTION: {
       return adapter.addOne({
-        id: `${id++}`,
+        id: id++,
         value: action.option
       }, state);
     }
@@ -51,6 +51,7 @@ export function reducer(state = initialState, action: actions.All): State {
       return adapter.removeOne(action.optionId, state);
     }
     case actions.CLEAR: {
+      id = 1;
       return initialState;
     }
     default: {
