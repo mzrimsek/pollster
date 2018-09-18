@@ -33,4 +33,5 @@ export interface FirestorePollItem {
   selectionMode: SelectionMode;
   createdAt: number;
   createdBy: string;
+  validUntil: number | null;
 }

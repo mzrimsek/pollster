@@ -6,4 +6,5 @@ export interface Poll {
   selectionMode: SelectionMode;
   createdAt: number;
   createdBy: string;
+  validUntil: number | null;
 }
