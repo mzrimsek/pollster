@@ -114,6 +114,8 @@ describe('CreatePollComponent', () => {
         }]
       };
       saveButton = fixture.nativeElement.querySelector('.create-poll .save button');
+
+      spyOn(component, 'getNowTime').and.returnValue(10000);
     });
 
     it('Should dispatch Save', () => {
@@ -126,7 +128,7 @@ describe('CreatePollComponent', () => {
           'Option 1': 0,
           'Option 2': 0
         },
-        createdAt: new Date().getTime(),
+        createdAt: 10000,
         createdBy: 'Anonymous'
       }));
     });
