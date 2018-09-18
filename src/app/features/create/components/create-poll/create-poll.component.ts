@@ -35,10 +35,6 @@ export class CreatePollComponent implements OnInit {
     }
   }
 
-  removeOption(optionId: number) {
-    this.store.dispatch(new actions.RemoveOption(optionId));
-  }
-
   save() {
     const optionsRecord: Record<string, number> = {};
     this.info.options.forEach((option) => {
