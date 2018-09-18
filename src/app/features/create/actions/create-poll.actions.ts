@@ -38,12 +38,6 @@ export class Save implements Action {
   constructor(public poll: Poll) { }
 }
 
-export const SAVE_SUCCEEDED = '[Create Poll] Save Succeeded';
-export class SaveSucceeded implements Action {
-  readonly type = SAVE_SUCCEEDED;
-  constructor(public pollId: string) { }
-}
-
 export const CLEAR = '[Create Poll] Clear';
 export class Clear implements Action {
   readonly type = CLEAR;
@@ -56,5 +50,4 @@ export type All = SetTitle |
   SetMode |
   SetValidUntil |
   Save |
-  SaveSucceeded |
   Clear;

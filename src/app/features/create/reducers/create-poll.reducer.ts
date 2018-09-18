@@ -18,7 +18,8 @@ export const adapter: EntityAdapter<OptionEntity> = createEntityAdapter<OptionEn
 const initialState: State = adapter.getInitialState({
   title: '',
   selectionMode: 'SINGLE',
-  validUntil: null
+  validUntil: null,
+  newPollId: ''
 });
 
 export function reducer(state = initialState, action: actions.All): State {

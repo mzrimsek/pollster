@@ -50,7 +50,7 @@ export class CreatePollComponent implements OnInit {
       selectionMode: this.info.selectionMode,
       validUntil: this.info.validUntil,
       options: optionsRecord,
-      createdAt: new Date().getUTCDate(),
+      createdAt: new Date().getTime(),
       createdBy: 'Anonymous'
     };
     this.store.dispatch(new actions.Save(poll));

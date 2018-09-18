@@ -9,6 +9,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { CreatePollComponent } from './components/create-poll/create-poll.component';
 import { CreateComponent } from './create.component';
 
+import { CreatePollEffects } from './effects/create-poll.effects';
+
 import { PollService } from '../../shared/services/poll.service';
 
 import { reducers } from './reducers/root.reducer';
@@ -18,7 +20,7 @@ import { reducers } from './reducers/root.reducer';
     CommonModule,
     SharedModule,
     StoreModule.forFeature('create', reducers),
-    EffectsModule.forFeature([])
+    EffectsModule.forFeature([CreatePollEffects])
   ],
   declarations: [CreateComponent, CreatePollComponent],
   providers: [PollService],

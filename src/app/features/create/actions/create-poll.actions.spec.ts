@@ -91,18 +91,6 @@ describe('Create Poll Actions', () => {
     });
   });
 
-  describe('SaveSucceeded', () => {
-    it('Should have correct type', () => {
-      const action = new actions.SaveSucceeded('');
-      expect(action.type).toBe(actions.SAVE_SUCCEEDED);
-    });
-
-    it('Should have correct pollId', () => {
-      const action = new actions.SaveSucceeded('Some PollId');
-      expect(action.pollId).toBe('Some PollId');
-    });
-  });
-
   describe('Clear', () => {
     it('Should have correct type', () => {
       const action = new actions.Clear();
