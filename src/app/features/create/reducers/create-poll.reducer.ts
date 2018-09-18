@@ -1,5 +1,3 @@
-import { tassign } from 'tassign';
-
 import * as actions from '../actions/create-poll.actions';
 
 import { SelectionMode } from '../../../shared/models';
@@ -8,29 +6,42 @@ export interface State {
   title: string;
   options: string[];
   selectionMode: SelectionMode;
-  createdAt: number;
-  createdBy: string;
+  validUntil: number | null;
 }
 
 const initialState: State = {
   title: '',
   options: [],
   selectionMode: 'SINGLE',
-  createdAt: 0,
-  createdBy: 'Anonymous'
+  validUntil: null
 };
 
 export function reducer(state = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.SET_TITLE: {
-      return tassign(state, { title: action.title });
+      return {
+        ...state,
+        title: action.title
+      };
     }
     case actions.SET_MODE: {
-      return tassign(state, { selectionMode: action.mode });
+      return {
+        ...state,
+        selectionMode: action.mode
+      };
+    }
+    case actions.SET_VALID_UNTIL: {
+      return {
+        ...state,
+        validUntil: action.time
+      };
     }
     case actions.ADD_OPTION: {
       const options = [...state.options, action.option];
-      return tassign(state, { options });
+      return {
+        ...state,
+        options
+      };
     }
     case actions.CLEAR: {
       return initialState;
