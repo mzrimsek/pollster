@@ -17,12 +17,12 @@ export class VoteEffects {
 
   @Effect() vote$ =
     this.actions$
-      .ofType(voteActions.SEND_VOTE)
+      .ofType(voteActions.VOTE)
       .pipe(
-        map(action => action as voteActions.SendVote),
+        map(action => action as voteActions.Vote),
         map(action => action.payload),
         switchMap(payload => this.pollService.saveVote(payload)
           .pipe(
-            map(() => new voteActions.SendVoteSucceeded()),
-            catchError(err => of(new appActions.Error(voteActions.SEND_VOTE, err.message))))));
+            map(() => new voteActions.VoteSucceeded()),
+            catchError(err => of(new appActions.Error(voteActions.VOTE, err.message))))));
 }

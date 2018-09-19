@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable, of, ReplaySubject, throwError } from 'rxjs';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { CreatePollEffects } from './create-poll.effects';
 
@@ -13,7 +13,7 @@ import { PollService } from '../../../shared/services/poll.service';
 import * as appActions from '../../../actions/app.actions';
 import * as createPollActions from '../actions/create-poll.actions';
 
-import { Poll } from '../../../shared/models';
+import { MockPollService } from '../../../test-helpers/mocks';
 
 describe('Create Poll Effects', () => {
   let actions: any;
@@ -91,9 +91,3 @@ describe('Create Poll Effects', () => {
     });
   });
 });
-
-class MockPollService {
-  savePoll(_poll: Poll): Observable<string> {
-    return of('PollId');
-  }
-}

@@ -10,7 +10,7 @@ const inititalState: State = {
 
 export function reducer(state = inititalState, action: actions.All): State {
   switch (action.type) {
-    case actions.SEND_VOTE_SUCCEEDED: {
+    case actions.VOTE_SUCCEEDED: {
       return {
         ...state,
         voteSucceeded: true

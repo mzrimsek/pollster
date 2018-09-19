@@ -31,6 +31,6 @@ export class VoteComponent implements OnInit {
       pollId: this.pollId,
       option
     };
-    this.store.dispatch(new voteActions.SendVote(payload));
+    this.store.dispatch(new voteActions.Vote(payload));
   }
 }
