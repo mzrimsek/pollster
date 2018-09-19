@@ -34,7 +34,7 @@ export class PollService {
         [payload.option]: poll.options[payload.option] + 1
       };
       this.pollCollection.doc(payload.pollId).update({ options });
-    }).unsubscribe();
+    });
     return of(null);
   }
 }
