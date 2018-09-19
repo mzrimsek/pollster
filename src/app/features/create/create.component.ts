@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
+import createSelectors, { State } from './reducers/root.reducer';
+
+import { CreatePollInfo } from './models';
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -7,9 +15,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  createPollInfo$: Observable<CreatePollInfo>;
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
+    this.createPollInfo$ = this.store.select(createSelectors.createPollInfo);
   }
-
 }

@@ -1,0 +1,29 @@
+<div class="create-poll">
+  <div class="title">
+    <input type="text"
+           name="title"
+           id="title"
+           placeholder="Poll Title"
+           #title
+           [value]="info.title"
+           (change)="setTitle(title)">
+  </div>
+
+  <div class="add-option">
+    <input type="text"
+           placeholder="New Option"
+           #option>
+    <button (click)="addOption(option)">Add</button>
+  </div>
+
+  <div class="options">
+    <ul>
+      <app-create-option *ngFor="let option of info.options"
+                         [option]="option"></app-create-option>
+    </ul>
+  </div>
+
+  <div class="save">
+    <button (click)="save()">Save</button>
+  </div>
+</div>
