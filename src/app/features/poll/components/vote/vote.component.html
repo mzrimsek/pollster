@@ -4,10 +4,9 @@
 
   <ul>
     <li *ngFor="let option of getPollOptions()">
-      <div class="text">
-        {{ option }} : {{ poll.options[option] }}
-      </div>
-      <button (click)="vote(option)">Vote</button>
+      <app-poll-option [pollId]="pollId"
+                       [option]="option"
+                       [value]="poll.options[option]"></app-poll-option>
     </li>
   </ul>
 </div>

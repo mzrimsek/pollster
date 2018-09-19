@@ -3,9 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { of } from 'rxjs';
 
-import { FirestorePollItem, PollService } from './poll.service';
+import { PollService } from './poll.service';
 
-import { Poll } from '../models';
+import { poll } from '../../test-helpers';
 
 describe('PollService', () => {
   let service: PollService;
@@ -15,7 +15,7 @@ describe('PollService', () => {
     TestBed.configureTestingModule({
       providers: [
         PollService,
-        { provide: AngularFirestore, useValue: angularFirestoreStub }
+        { provide: AngularFirestore, useValue: poll.firestore.angularFirestoreStub }
       ]
     });
 
@@ -32,58 +32,61 @@ describe('PollService', () => {
   });
 
   describe('savePoll', () => {
-    const poll: Poll = {
-      title: 'Lunch',
-      options: {
-        'Chipotle': 0,
-        'Sheetz': 0,
-        'Pulp': 0
-      },
-      selectionMode: 'SINGLE',
-      createdAt: 10000,
-      createdBy: 'Anonymous',
-      validUntil: null
-    };
-
     it('Should call collection add', () => {
-      service.savePoll(poll);
-      expect(collectionStub.add).toHaveBeenCalledWith(poll);
+      service.savePoll(poll.testPoll);
+      expect(poll.firestore.collectionStub.add).toHaveBeenCalledWith(poll.testPoll);
     });
   });
 
   describe('getPoll', () => {
     it('Should call collection doc with pollId', () => {
       service.getPoll('someId');
-      expect(collectionStub.doc).toHaveBeenCalledWith('someId');
+      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith('someId');
+    });
+  });
+
+  describe('saveVote', () => {
+    beforeEach(() => {
+      spyOn(service, 'getPoll').and.returnValue(of(poll.testPoll));
+    });
+
+    it('Should call collection doc with pollId', () => {
+      service.saveVote({
+        pollId: 'someId',
+        option: 'Chipotle'
+      });
+      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith('someId');
+    });
+
+    it('Should call doc update with updated options', () => {
+      service.saveVote({
+        pollId: 'someId',
+        option: 'Chipotle'
+      });
+      expect(poll.firestore.documentStub.update).toHaveBeenCalledWith({
+        options: {
+          ...poll.testPoll.options,
+          'Chipotle': 1
+        }
+      });
+    });
+
+    it('Should call getPoll', () => {
+      service.saveVote({
+        pollId: 'someId',
+        option: 'Chipotle'
+      });
+      expect(service.getPoll).toHaveBeenCalledWith('someId');
+    });
+
+    it('Should return null observable', () => {
+      const result = service.saveVote({
+        pollId: 'someId',
+        option: 'Chipotle'
+      });
+      result.subscribe(res => {
+        expect(res).toBeNull();
+      });
     });
   });
 });
-
-const testPollItem: FirestorePollItem = {
-  title: 'Test Poll',
-  options: {
-    'Option 1': 0,
-    'Option 2': 0
-  },
-  selectionMode: 'SINGLE',
-  createdAt: 0,
-  createdBy: 'Anonymous',
-  validUntil: null
-};
-
-const documentStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(testPollItem))
-};
-
-const collectionStub = {
-  doc: jasmine.createSpy('doc').and.returnValue(documentStub),
-  add: jasmine.createSpy('add').and.returnValue(new Promise((resolve) => {
-    resolve({
-      id: 'someDocId'
-    });
-  }))
-};
-
-const angularFirestoreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-};

@@ -13,6 +13,7 @@ import { PollComponent } from './poll.component';
 import { VoteEffects } from './effects/vote.effects';
 
 import { reducers } from './reducers/root.reducer';
+import { OptionComponent } from './components/option/option.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { reducers } from './reducers/root.reducer';
     StoreModule.forFeature('poll', reducers),
     EffectsModule.forFeature([VoteEffects])
   ],
-  declarations: [PollComponent, VoteComponent, ResultsComponent]
+  declarations: [PollComponent, VoteComponent, ResultsComponent, OptionComponent]
 })
 export class PollModule { }

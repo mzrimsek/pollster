@@ -27,7 +27,6 @@ export class PollService {
   }
 
   saveVote(payload: VotePayload): Observable<null> {
-    console.log('save vote');
     const poll$ = this.getPoll(payload.pollId).pipe(first());
     poll$.subscribe(poll => {
       const options = {

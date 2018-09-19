@@ -13,7 +13,7 @@ import { PollService } from '../../../shared/services/poll.service';
 import * as appActions from '../../../actions/app.actions';
 import * as createPollActions from '../actions/create-poll.actions';
 
-import { MockPollService } from '../../../test-helpers/mocks';
+import { poll } from '../../../test-helpers';
 
 describe('Create Poll Effects', () => {
   let actions: any;
@@ -28,7 +28,7 @@ describe('Create Poll Effects', () => {
       providers: [
         CreatePollEffects,
         provideMockActions(() => actions),
-        { provide: PollService, useClass: MockPollService },
+        { provide: PollService, useClass: poll.MockPollService },
         { provide: Router, useValue: router }
       ]
     });
@@ -38,17 +38,7 @@ describe('Create Poll Effects', () => {
   });
 
   describe('Save', () => {
-    const action = new createPollActions.Save({
-      title: 'Some Title',
-      selectionMode: 'SINGLE',
-      validUntil: null,
-      options: {
-        'Option 1': 0,
-        'Option 2': 0
-      },
-      createdAt: 10000,
-      createdBy: 'Anonymous'
-    });
+    const action = new createPollActions.Save(poll.testPoll);
 
     it('Should dispatch Clear', () => {
       actions = hot('-a', { a: action });

@@ -12,7 +12,7 @@ import { PollService } from '../../../shared/services/poll.service';
 import * as appActions from '../../../actions/app.actions';
 import * as voteActions from '../actions/vote.actions';
 
-import { MockPollService } from '../../../test-helpers/mocks';
+import { poll } from '../../../test-helpers';
 
 describe('Vote Effects', () => {
   let actions: any;
@@ -24,7 +24,7 @@ describe('Vote Effects', () => {
       providers: [
         VoteEffects,
         provideMockActions(() => actions),
-        { provide: PollService, useClass: MockPollService }
+        { provide: PollService, useClass: poll.MockPollService }
       ]
     });
 
