@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
@@ -18,13 +19,17 @@ describe('Create Poll Effects', () => {
   let actions: any;
   let effects: CreatePollEffects;
   let pollService: PollService;
+  const router = {
+    navigate: jasmine.createSpy('navigate')
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         CreatePollEffects,
         provideMockActions(() => actions),
-        { provide: PollService, useClass: MockPollService }
+        { provide: PollService, useClass: MockPollService },
+        { provide: Router, useValue: router }
       ]
     });
 
@@ -73,6 +78,15 @@ describe('Create Poll Effects', () => {
       spyOn(pollService, 'savePoll').and.callThrough();
       effects.save$.subscribe(() => {
         expect(pollService.savePoll).toHaveBeenCalled();
+      });
+    });
+
+    it('Should navigate to new poll', () => {
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      effects.save$.subscribe(() => {
+        expect(router.navigate).toHaveBeenCalledWith(['/poll/PollId']);
       });
     });
   });
