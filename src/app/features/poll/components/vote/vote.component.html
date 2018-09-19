@@ -1,0 +1,12 @@
+<div class="vote"
+     *ngIf="poll">
+  {{ poll.title }} by {{ poll.createdBy }} on {{ poll.createdAt | date:'short' }}
+
+  <ul>
+    <li *ngFor="let option of getPollOptions()">
+      <app-poll-option [pollId]="pollId"
+                       [option]="option"
+                       [value]="poll.options[option]"></app-poll-option>
+    </li>
+  </ul>
+</div>

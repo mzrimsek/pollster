@@ -1,7 +1,24 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { CreateComponent } from './features/create/create.component';
+import { HomeComponent } from './features/home/home.component';
+import { PollComponent } from './features/poll/poll.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'create',
+    component: CreateComponent
+  },
+  {
+    path: 'poll/:pollId',
+    component: PollComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
