@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
-import { Poll, SelectionMode } from '../models';
+import { Poll, SelectionMode, VotePayload } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,19 @@ export class PollService {
   getPoll(pollId: string): Observable<Poll> {
     const pollDoc = this.pollCollection.doc<FirestorePollItem>(pollId).valueChanges();
     return pollDoc.pipe(map(doc => doc as Poll));
+  }
+
+  saveVote(payload: VotePayload): Observable<null> {
+    console.log('save vote');
+    const poll$ = this.getPoll(payload.pollId).pipe(first());
+    poll$.subscribe(poll => {
+      const options = {
+        ...poll.options,
+        [payload.option]: poll.options[payload.option] + 1
+      };
+      this.pollCollection.doc(payload.pollId).update({ options });
+    }).unsubscribe();
+    return of(null);
   }
 }
 

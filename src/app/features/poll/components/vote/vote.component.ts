@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { Poll } from '../../../../shared/models';
+import { Store } from '@ngrx/store';
+
+import * as voteActions from '../../actions/vote.actions';
+
+import { State } from '../../reducers/root.reducer';
+
+import { Poll, VotePayload } from '../../../../shared/models';
 
 @Component({
   selector: 'app-poll-vote',
@@ -11,7 +17,20 @@ import { Poll } from '../../../../shared/models';
 export class VoteComponent implements OnInit {
 
   @Input() poll: Poll;
-  constructor() { }
+  @Input() pollId = '';
+  constructor(private store: Store<State>) { }
 
   ngOnInit() { }
+
+  getPollOptions(): string[] {
+    return Object.entries(this.poll.options).map(([key]) => key);
+  }
+
+  vote(option: string) {
+    const payload: VotePayload = {
+      pollId: this.pollId,
+      option
+    };
+    this.store.dispatch(new voteActions.SendVote(payload));
+  }
 }
