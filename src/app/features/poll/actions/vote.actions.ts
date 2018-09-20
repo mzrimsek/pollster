@@ -9,6 +9,12 @@ export class Vote implements Action {
   constructor(public payload: VotePayload) { }
 }
 
+export const VOTE_SUCCEEDED = '[Vote] Vote Succeeded';
+export class VoteSucceeded implements Action {
+  readonly type = VOTE_SUCCEEDED;
+  constructor(public payload: VotePayload) { }
+}
+
 export const TRACK_VOTE = '[Vote] Track Vote';
 export class TrackVote implements Action {
   readonly type = TRACK_VOTE;

@@ -77,13 +77,17 @@ describe('Create Poll Actions', () => {
     it('Should have correct poll', () => {
       const action = new actions.Save(poll.testPoll);
       expect(action.poll).toEqual({
-        title: '',
+        title: 'Lunch',
+        options: {
+          'Chipotle': 0,
+          'Sheetz': 0,
+          'Pulp': 0
+        },
         selectionMode: 'SINGLE',
-        validUntil: null,
-        options: {},
         createdAt: 10000,
         createdByName: 'Anonymous',
-        createdByUid: 'Some UserId'
+        createdByUid: 'Some UserId',
+        validUntil: null
       });
     });
   });

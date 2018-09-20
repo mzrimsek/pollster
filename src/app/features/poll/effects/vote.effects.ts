@@ -24,8 +24,16 @@ export class VoteEffects {
         map(action => action.payload),
         switchMap(payload => this.pollService.saveVote(payload)
           .pipe(
-            map(data => new voteActions.TrackVote(data)),
+            map(data => new voteActions.VoteSucceeded(data)),
             catchError(err => of(new appActions.Error(voteActions.VOTE, err.message))))));
+
+  @Effect() voteSucceeded$ =
+    this.actions$
+      .ofType(voteActions.VOTE_SUCCEEDED)
+      .pipe(
+        map(action => action as voteActions.VoteSucceeded),
+        map(action => new voteActions.TrackVote(action.payload)));
+
 
   @Effect() trackVote$ =
     this.actions$
