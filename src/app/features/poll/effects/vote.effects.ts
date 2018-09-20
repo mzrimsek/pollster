@@ -43,8 +43,8 @@ export class VoteEffects {
       .ofType(voteActions.LOAD_VOTE_INFO)
       .pipe(
         map(action => action as voteActions.LoadVoteInfo),
-        switchMap(action => this.voteService.getVoteForPoll(action.userId, action.pollId)
+        switchMap(action => this.voteService.getVotesForUser(action.userId)
           .pipe(
-            map(info => new voteActions.LoadVoteInfoSucceeded(info)),
+            map(votes => new voteActions.LoadVoteInfoSucceeded(votes)),
             catchError(err => of(new appActions.Error(voteActions.LOAD_VOTE_INFO, err.message))))));
 }

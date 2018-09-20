@@ -1,10 +1,9 @@
 <div class="poll">
-  <app-poll-vote *ngIf="!(hasVoted$ | async)"
+  <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
                  [pollId]="pollId"
-                 [poll]="poll$ | async"
-                 [userId]="userId"></app-poll-vote>
+                 [poll]="poll$ | async"></app-poll-vote>
   <div class="voteInfo"
-       *ngIf="hasVoted$ | async">
-    You voted for {{ (voteInfo$ | async).option }} on {{ (voteInfo$ | async).votedOn | date:'short' }}
+       *ngIf="(voteInfo$ | async)[pollId]">
+    You voted for {{ (voteInfo$ | async)[pollId].option }} on {{ (voteInfo$ | async)[pollId].votedOn | date:'short' }}
   </div>
 </div>

@@ -24,13 +24,13 @@ export class TrackVoteSucceeded implements Action {
 export const LOAD_VOTE_INFO = '[Vote] Load Vote Info';
 export class LoadVoteInfo implements Action {
   readonly type = LOAD_VOTE_INFO;
-  constructor(public userId: string, public pollId: string) { }
+  constructor(public userId: string) { }
 }
 
 export const LOAD_VOTE_INFO_SUCCEEDED = '[Vote] Load Vote Info Succeeded';
 export class LoadVoteInfoSucceeded implements Action {
   readonly type = LOAD_VOTE_INFO_SUCCEEDED;
-  constructor(public info: VoteInfo) { }
+  constructor(public info: VoteInfo[]) { }
 }
 
 export type All = Vote |

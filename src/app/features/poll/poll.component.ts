@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
 import { PollService } from '../../shared/services/poll.service';
-import { UserService } from '../auth/services/user.service';
 
 import pollSelectors, { State } from './reducers/root.reducer';
 
@@ -21,22 +21,18 @@ import { VoteInfo } from './models';
 export class PollComponent implements OnInit {
 
   pollId = '';
-  userId = '';
   poll$: Observable<Poll>;
-  voteInfo$: Observable<VoteInfo>;
-  hasVoted$: Observable<boolean>;
+  voteInfo$: Observable<Dictionary<VoteInfo>>;
   constructor(private store: Store<State>,
     private route: ActivatedRoute,
-    private pollService: PollService,
-    private userService: UserService) { }
+    private pollService: PollService) { }
 
   ngOnInit() {
+    this.voteInfo$ = this.store.select(pollSelectors.voteInfo);
     this.route.params.subscribe(params => {
       this.pollId = params.pollId;
       this.poll$ = this.pollService.getPoll(this.pollId);
     });
-    this.userService.getUser().subscribe(user => this.userId = user.uid);
-    this.voteInfo$ = this.store.select(pollSelectors.voteInfo);
-    this.hasVoted$ = this.store.select(pollSelectors.hasVoted);
+
   }
 }
