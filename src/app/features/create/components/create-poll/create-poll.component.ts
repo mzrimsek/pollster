@@ -2,11 +2,14 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { Store } from '@ngrx/store';
 
+import { UserService } from '../../../auth/services/user.service';
+
 import * as actions from '../../actions/create-poll.actions';
 
 import { State } from '../../reducers/root.reducer';
 
 import { Poll } from '../../../../shared/models';
+import { User } from '../../../auth/models';
 import { CreatePollInfo } from '../../models';
 
 @Component({
@@ -19,9 +22,12 @@ export class CreatePollComponent implements OnInit {
 
   @Input() info: CreatePollInfo;
   private optionId = 1;
-  constructor(private store: Store<State>) { }
+  private user: User;
+  constructor(private store: Store<State>, private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.getUser().subscribe(user => this.user = user);
+  }
 
   setTitle(titleEl: HTMLInputElement) {
     if (titleEl.value) {
@@ -48,7 +54,8 @@ export class CreatePollComponent implements OnInit {
       validUntil: this.info.validUntil,
       options: optionsRecord,
       createdAt: this.getNowTime(),
-      createdBy: 'Anonymous'
+      createdByName: this.user.displayName ? this.user.displayName : 'Anonymous',
+      createdByUid: this.user.uid
     };
     this.store.dispatch(new actions.Save(poll));
   }

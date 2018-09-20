@@ -14,4 +14,19 @@ export class VoteSucceeded implements Action {
   constructor() { }
 }
 
-export type All = Vote | VoteSucceeded;
+export const TRACK_VOTE = '[Vote] Track Vote';
+export class TrackVote implements Action {
+  readonly type = TRACK_VOTE;
+  constructor(public payload: VotePayload) { }
+}
+
+export const TRACK_VOTE_SUCCEEDED = '[Vote] Track Vote Succeeded';
+export class TrackVoteSucceeded implements Action {
+  readonly type = TRACK_VOTE_SUCCEEDED;
+  constructor() { }
+}
+
+export type All = Vote |
+  VoteSucceeded |
+  TrackVote |
+  TrackVoteSucceeded;

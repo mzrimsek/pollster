@@ -5,6 +5,7 @@ export interface Poll {
   options: Record<string, number>;
   selectionMode: SelectionMode;
   createdAt: number;
-  createdBy: string;
+  createdByName: string;
+  createdByUid: string;
   validUntil: number | null;
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from 'angularfire2';
@@ -19,9 +19,12 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 
+import { clearState } from './reducers/clear.meta.reducer';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
+
+const metaReducers: MetaReducer<any>[] = [clearState];
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router'
     }),

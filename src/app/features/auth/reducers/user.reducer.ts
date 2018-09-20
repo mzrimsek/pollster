@@ -2,9 +2,9 @@ import * as actions from '../actions/user.actions';
 
 export interface State {
   uid: string;
-  displayName: string;
-  email: string;
-  photoURL: string;
+  displayName: string | null;
+  email: string | null;
+  photoURL: string | null;
   providerId: string;
 }
 
