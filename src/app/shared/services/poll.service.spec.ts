@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { PollService } from './poll.service';
 
-import { poll } from '../../test-helpers';
+import { poll, vote } from '../../test-helpers';
 
 describe('PollService', () => {
   let service: PollService;
@@ -40,8 +40,8 @@ describe('PollService', () => {
 
   describe('getPoll', () => {
     it('Should call collection doc with pollId', () => {
-      service.getPoll('someId');
-      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith('someId');
+      service.getPoll(vote.testPayload.pollId);
+      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith(vote.testPayload.pollId);
     });
   });
 
@@ -51,18 +51,12 @@ describe('PollService', () => {
     });
 
     it('Should call collection doc with pollId', () => {
-      service.saveVote({
-        pollId: 'someId',
-        option: 'Chipotle'
-      });
-      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith('someId');
+      service.saveVote(vote.testPayload);
+      expect(poll.firestore.collectionStub.doc).toHaveBeenCalledWith(vote.testPayload.pollId);
     });
 
     it('Should call doc update with updated options', () => {
-      service.saveVote({
-        pollId: 'someId',
-        option: 'Chipotle'
-      });
+      service.saveVote(vote.testPayload);
       expect(poll.firestore.documentStub.update).toHaveBeenCalledWith({
         options: {
           ...poll.testPoll.options,
@@ -72,20 +66,14 @@ describe('PollService', () => {
     });
 
     it('Should call getPoll', () => {
-      service.saveVote({
-        pollId: 'someId',
-        option: 'Chipotle'
-      });
-      expect(service.getPoll).toHaveBeenCalledWith('someId');
+      service.saveVote(vote.testPayload);
+      expect(service.getPoll).toHaveBeenCalledWith(vote.testPayload.pollId);
     });
 
-    it('Should return null observable', () => {
-      const result = service.saveVote({
-        pollId: 'someId',
-        option: 'Chipotle'
-      });
+    it('Should return vote payload', () => {
+      const result = service.saveVote(vote.testPayload);
       result.subscribe(res => {
-        expect(res).toBeNull();
+        expect(res).toEqual(vote.testPayload);
       });
     });
   });

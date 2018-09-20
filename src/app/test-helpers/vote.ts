@@ -3,17 +3,16 @@ import { Observable, of } from 'rxjs';
 import { VoteInfo } from '../features/poll/models';
 import { VotePayload } from '../shared/models';
 
-
 export namespace vote {
   export const testPayload: VotePayload = {
     userId: 'Some UserId',
     pollId: 'Some PollId',
-    option: 'Some Option'
+    option: 'Chipotle'
   };
 
   export const testVoteInfo: VoteInfo = {
     pollId: 'Some PollId',
-    option: 'Some Option',
+    option: 'Chipotle',
     votedOn: 10000
   };
 

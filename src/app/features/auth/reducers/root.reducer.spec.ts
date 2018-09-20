@@ -1,4 +1,4 @@
-import { _selectUserData, _selectUserLoggedIn, AuthState, State } from './root.reducer';
+import { _selectUserLoggedIn, AuthState, State } from './root.reducer';
 
 import { user } from '../../../test-helpers';
 

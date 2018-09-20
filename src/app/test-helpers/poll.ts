@@ -14,8 +14,8 @@ export namespace poll {
       return of(testPoll);
     }
 
-    saveVote(_payload: VotePayload): Observable<null> {
-      return of(null);
+    saveVote(payload: VotePayload): Observable<VotePayload> {
+      return of(payload);
     }
   }
 

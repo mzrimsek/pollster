@@ -11,11 +11,7 @@ describe('Vote Actions', () => {
 
     it('Should have correct payload', () => {
       const action = new actions.Vote(vote.testPayload);
-      expect(action.payload).toEqual({
-        userId: 'Some UserId',
-        pollId: 'Some PollId',
-        option: 'Some Option'
-      });
+      expect(action.payload).toEqual(vote.testPayload);
     });
   });
 
@@ -27,11 +23,7 @@ describe('Vote Actions', () => {
 
     it('Should have correct payload', () => {
       const action = new actions.VoteSucceeded(vote.testPayload);
-      expect(action.payload).toEqual({
-        userId: 'Some UserId',
-        pollId: 'Some PollId',
-        option: 'Some Option'
-      });
+      expect(action.payload).toEqual(vote.testPayload);
     });
   });
 
@@ -43,11 +35,7 @@ describe('Vote Actions', () => {
 
     it('Should have correct payload', () => {
       const action = new actions.TrackVote(vote.testPayload);
-      expect(action.payload).toEqual({
-        userId: 'Some UserId',
-        pollId: 'Some PollId',
-        option: 'Some Option'
-      });
+      expect(action.payload).toEqual(vote.testPayload);
     });
   });
 
@@ -59,11 +47,7 @@ describe('Vote Actions', () => {
 
     it('Should have correct payload', () => {
       const action = new actions.TrackVoteSucceeded(vote.testVoteInfo);
-      expect(action.info).toEqual({
-        pollId: 'Some PollId',
-        option: 'Some Option',
-        votedOn: 10000
-      });
+      expect(action.info).toEqual(vote.testVoteInfo);
     });
   });
 
@@ -87,11 +71,7 @@ describe('Vote Actions', () => {
 
     it('Should have correct payload', () => {
       const action = new actions.LoadVoteInfoSucceeded([vote.testVoteInfo]);
-      expect(action.info).toEqual([{
-        pollId: 'Some PollId',
-        option: 'Some Option',
-        votedOn: 10000
-      }]);
+      expect(action.info).toEqual([vote.testVoteInfo]);
     });
   });
 });

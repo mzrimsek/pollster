@@ -134,8 +134,8 @@ describe('CreatePollComponent', () => {
           'Option 2': 0
         },
         createdAt: 10000,
-        createdByName: 'Anonymous',
-        createdByUid: 'Some UserId'
+        createdByName: 'Jim Bob',
+        createdByUid: 'some id'
       }));
     });
   });

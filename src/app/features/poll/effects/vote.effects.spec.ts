@@ -15,7 +15,7 @@ import * as voteActions from '../actions/vote.actions';
 
 import { poll, vote } from '../../../test-helpers';
 
-fdescribe('Vote Effects', () => {
+describe('Vote Effects', () => {
   let actions: any;
   let effects: VoteEffects;
   let pollService: PollService;
@@ -120,13 +120,13 @@ fdescribe('Vote Effects', () => {
   describe('Load Vote Info', () => {
     const action = new voteActions.LoadVoteInfo('uid');
 
-    it('Should dispatch TrackVoteSucceeded', () => {
+    it('Should dispatch LoadVoteInfoSucceeded', () => {
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
         b: new voteActions.LoadVoteInfoSucceeded([vote.testVoteInfo])
       });
 
-      expect(effects.trackVote$).toBeObservable(expected);
+      expect(effects.loadVoteInfo$).toBeObservable(expected);
     });
 
     it('Should dispatch Error on error', () => {
