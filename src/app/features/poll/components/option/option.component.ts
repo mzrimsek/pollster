@@ -24,7 +24,7 @@ export class OptionComponent implements OnInit {
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(user => this.userId = user.uid);
+    this.userService.getUser().subscribe(user => this.userId = user.uid).unsubscribe();
   }
 
   vote() {

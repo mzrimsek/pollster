@@ -1,19 +1,27 @@
 import * as actions from '../actions/vote.actions';
 
 export interface State {
-  voteSucceeded: boolean;
+  option: string;
+  votedOn: number;
 }
 
 const inititalState: State = {
-  voteSucceeded: false
+  option: '',
+  votedOn: 0
 };
 
 export function reducer(state = inititalState, action: actions.All): State {
   switch (action.type) {
-    case actions.VOTE_SUCCEEDED: {
+    case actions.TRACK_VOTE_SUCCEEDED: {
       return {
         ...state,
-        voteSucceeded: true
+        ...action.info
+      };
+    }
+    case actions.LOAD_VOTE_INFO_SUCCEEDED: {
+      return {
+        ...state,
+        ...action.info
       };
     }
     default: {

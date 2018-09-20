@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { VotePayload } from '../models';
+import { VotePayload } from '../../../shared/models';
+import { VoteInfo } from '../models';
 
 @Injectable()
 export class VoteService {
@@ -13,13 +15,18 @@ export class VoteService {
     this.voteCollection = this.afs.collection<VoteCollection>('vote');
   }
 
-  trackVote(payload: VotePayload) {
+  trackVote(payload: VotePayload): Observable<VoteInfo> {
     const newItem: FirestoreVoteItem = {
       option: payload.option,
       votedOn: new Date().getTime()
     };
     this.getUserVoteCollection(payload.userId).doc(payload.pollId).set(newItem);
-    return of(null);
+    return of(newItem);
+  }
+
+  getVoteForPoll(userId: string, pollId: string): Observable<VoteInfo> {
+    return this.getUserVoteCollection(userId).doc<FirestoreVoteItem>(pollId).valueChanges()
+      .pipe(map(docItem => docItem as VoteInfo));
   }
 
   private getUserVoteCollection(userId: string): AngularFirestoreCollection<FirestoreVoteItem> {

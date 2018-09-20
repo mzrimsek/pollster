@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { PollService } from '../../../shared/services/poll.service';
-import { VoteService } from '../../../shared/services/vote.service';
+import { VoteService } from '../services/vote.service';
 
 import * as appActions from '../../../actions/app.actions';
 import * as voteActions from '../actions/vote.actions';
@@ -24,10 +24,7 @@ export class VoteEffects {
         map(action => action.payload),
         switchMap(payload => this.pollService.saveVote(payload)
           .pipe(
-            mergeMap(data => [
-              new voteActions.VoteSucceeded(),
-              new voteActions.TrackVote(data)
-            ]),
+            map(data => new voteActions.TrackVote(data)),
             catchError(err => of(new appActions.Error(voteActions.VOTE, err.message))))));
 
   @Effect() trackVote$ =
@@ -38,6 +35,16 @@ export class VoteEffects {
         map(action => action.payload),
         switchMap(payload => this.voteService.trackVote(payload)
           .pipe(
-            map(() => new voteActions.TrackVoteSucceeded()),
+            map(data => new voteActions.TrackVoteSucceeded(data)),
             catchError(err => of(new appActions.Error(voteActions.TRACK_VOTE, err.message))))));
+
+  @Effect() loadVoteInfo$ =
+    this.actions$
+      .ofType(voteActions.LOAD_VOTE_INFO)
+      .pipe(
+        map(action => action as voteActions.LoadVoteInfo),
+        switchMap(action => this.voteService.getVoteForPoll(action.userId, action.pollId)
+          .pipe(
+            map(info => new voteActions.LoadVoteInfoSucceeded(info)),
+            catchError(err => of(new appActions.Error(voteActions.LOAD_VOTE_INFO, err.message))))));
 }

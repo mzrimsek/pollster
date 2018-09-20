@@ -2,6 +2,8 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 
 import * as fromVote from './vote.reducer';
 
+import { VoteInfo } from '../models';
+
 export interface PollState {
   vote: fromVote.State;
 }
@@ -17,10 +19,12 @@ export const reducers: ActionReducerMap<PollState, any> = {
 export const _selectPollState = createFeatureSelector<PollState>('poll');
 export const _selectVote = createSelector(_selectPollState, state => state.vote);
 
-export const _selectVoteSucceeded = createSelector(_selectVote, vote => vote.voteSucceeded);
+export const _selectHasVoted = createSelector(_selectVote, vote => vote.option !== '' && vote.votedOn !== 0);
+export const _selectVoteInfo = createSelector(_selectVote, vote => vote as VoteInfo);
 
 const pollSelectors = {
-  voteSucceeded: _selectVoteSucceeded
+  hasVoted: _selectHasVoted,
+  voteInfo: _selectVoteInfo
 };
 
 export default pollSelectors;
