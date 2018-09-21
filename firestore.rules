@@ -3,5 +3,8 @@ service cloud.firestore {
     match /poll/{pollId} {
       allow read, write: if true;
     }
+    match /vote/{userId}/votes/{poll} {
+      allow read, write: if request.auth.uid == userId;
+    }
   }
 }

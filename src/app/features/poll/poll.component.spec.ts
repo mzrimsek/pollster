@@ -55,10 +55,6 @@ describe('PollComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should select voteSucceeded', () => {
-    expect(store.select).toHaveBeenCalledWith(fromPoll._selectVoteSucceeded);
-  });
-
   xit('Should call pollService getPoll with pollId from route params', () => {
     spyOn(service, 'getPoll');
     expect(service.getPoll).toHaveBeenCalledWith('Some PollId');

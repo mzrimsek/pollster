@@ -1,6 +1,6 @@
 <div class="vote"
      *ngIf="poll">
-  {{ poll.title }} by {{ poll.createdBy }} on {{ poll.createdAt | date:'short' }}
+  {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
 
   <ul>
     <li *ngFor="let option of getPollOptions()">

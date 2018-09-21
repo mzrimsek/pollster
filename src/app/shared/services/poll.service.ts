@@ -6,9 +6,7 @@ import { first, map } from 'rxjs/operators';
 
 import { Poll, SelectionMode, VotePayload } from '../models';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PollService {
 
   private pollCollection: AngularFirestoreCollection<FirestorePollItem>;
@@ -26,7 +24,7 @@ export class PollService {
     return pollDoc.pipe(map(doc => doc as Poll));
   }
 
-  saveVote(payload: VotePayload): Observable<null> {
+  saveVote(payload: VotePayload): Observable<VotePayload> {
     const poll$ = this.getPoll(payload.pollId).pipe(first());
     poll$.subscribe(poll => {
       const options = {
@@ -35,7 +33,7 @@ export class PollService {
       };
       this.pollCollection.doc(payload.pollId).update({ options });
     });
-    return of(null);
+    return of(payload);
   }
 }
 
@@ -44,6 +42,7 @@ export interface FirestorePollItem {
   options: Record<string, number>;
   selectionMode: SelectionMode;
   createdAt: number;
-  createdBy: string;
+  createdByName: string;
+  createdByUid: string;
   validUntil: number | null;
 }

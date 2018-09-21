@@ -14,8 +14,8 @@ export namespace poll {
       return of(testPoll);
     }
 
-    saveVote(_payload: VotePayload): Observable<null> {
-      return of(null);
+    saveVote(payload: VotePayload): Observable<VotePayload> {
+      return of(payload);
     }
   }
 
@@ -28,7 +28,8 @@ export namespace poll {
     },
     selectionMode: 'SINGLE',
     createdAt: 10000,
-    createdBy: 'Anonymous',
+    createdByName: 'Anonymous',
+    createdByUid: 'Some UserId',
     validUntil: null
   };
 
@@ -41,7 +42,8 @@ export namespace poll {
       },
       selectionMode: 'SINGLE',
       createdAt: 0,
-      createdBy: 'Anonymous',
+      createdByName: 'Anonymous',
+      createdByUid: 'Some UserId',
       validUntil: null
     };
 

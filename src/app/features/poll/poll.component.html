@@ -1,4 +1,9 @@
 <div class="poll">
-  <app-poll-vote [pollId]="pollId"
+  <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
+                 [pollId]="pollId"
                  [poll]="poll$ | async"></app-poll-vote>
+  <div class="voteInfo"
+       *ngIf="(voteInfo$ | async)[pollId]">
+    You voted for {{ (voteInfo$ | async)[pollId].option }} on {{ (voteInfo$ | async)[pollId].votedOn | date:'short' }}
+  </div>
 </div>

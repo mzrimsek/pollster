@@ -5,10 +5,14 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 import { OptionComponent } from '../option/option.component';
 import { CreatePollComponent } from './create-poll.component';
 
+import { UserService } from '../../../auth/services/user.service';
+
 import * as createPollActions from '../../actions/create-poll.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCreate from '../../reducers/root.reducer';
+
+import { user } from '../../../../test-helpers';
 
 describe('CreatePollComponent', () => {
   let component: CreatePollComponent;
@@ -26,7 +30,8 @@ describe('CreatePollComponent', () => {
           ...fromRoot.reducers,
           'create': combineReducers(fromCreate.reducers)
         })
-      ]
+      ],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }]
     }).compileComponents();
   }));
 
@@ -129,7 +134,8 @@ describe('CreatePollComponent', () => {
           'Option 2': 0
         },
         createdAt: 10000,
-        createdBy: 'Anonymous'
+        createdByName: 'Anonymous',
+        createdByUid: 'some uid'
       }));
     });
   });

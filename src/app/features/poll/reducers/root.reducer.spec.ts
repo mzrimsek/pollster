@@ -1,19 +1,32 @@
-import { _selectVoteSucceeded, PollState, State } from './root.reducer';
+import { _selectVoteInfo, PollState, State } from './root.reducer';
 
 describe('Poll Root Reducer', () => {
   describe('Vote Selectors', () => {
-    describe('_selectVoteSucceeded', () => {
-      it('Should return correct value', () => {
+    describe('_selectVoteInfo', () => {
+      it('Should return dictionary of items', () => {
         const pollState: PollState = {
           vote: {
-            voteSucceeded: false
+            ids: ['abcde'],
+            entities: {
+              'abcde': {
+                pollId: 'abcde',
+                option: 'some option',
+                votedOn: 10000
+              }
+            }
           }
         };
         const state: State = { poll: pollState };
 
-        const result = _selectVoteSucceeded(state);
+        const result = _selectVoteInfo(state);
 
-        expect(result).toBe(false);
+        expect(result).toEqual({
+          'abcde': {
+            pollId: 'abcde',
+            option: 'some option',
+            votedOn: 10000
+          }
+        });
       });
     });
   });
