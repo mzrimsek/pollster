@@ -36,30 +36,55 @@ describe('VoteService', () => {
       }
     });
 
-    it('Should call vote collection with user id', () => {
-      fail();
+    it('Should call vote collection doc with user id', () => {
+      service.trackVote(vote.testPayload);
+      expect(vote.firestore.collectionStub.doc).toHaveBeenCalledWith(vote.testPayload.userId);
     });
 
     it('Should call document collection with "votes"', () => {
-      fail();
-    });
-
-    it('Should return empty list when no data', () => {
-      fail();
+      service.trackVote(vote.testPayload);
+      expect(vote.firestore.documentStub.collection).toHaveBeenCalledWith('votes');
     });
 
     it('Should return correct data', () => {
-      fail();
+      const result = service.trackVote(vote.testPayload, 10000);
+      result.subscribe(res => {
+        expect(res).toEqual({
+          pollId: vote.testPayload.pollId,
+          option: vote.testPayload.option,
+          votedOn: 10000
+        });
+      });
     });
   });
 
   describe('getVotesForUser', () => {
-    it('Should call vote collection with user id', () => {
-      fail();
+    it('Should call vote collection doc with user id', () => {
+      service.getVotesForUser('user id');
+      expect(vote.firestore.collectionStub.doc).toHaveBeenCalledWith('user id');
+    });
+
+    it('Should return empty list when there is no data', () => {
+      const result = service.getVotesForUser('user id');
+      result.subscribe(res => {
+        expect(res.length).toBe(0);
+      });
     });
 
     it('Should return correct data', () => {
-      fail();
+      vote.firestore.testVoteItems.push({
+        pollId: 'some id',
+        option: 'some option',
+        votedOn: 10000
+      });
+      const result = service.getVotesForUser('user id');
+      result.subscribe(res => {
+        expect(res).toEqual([{
+          pollId: 'some id',
+          option: 'some option',
+          votedOn: 10000
+        }]);
+      });
     });
   });
 });

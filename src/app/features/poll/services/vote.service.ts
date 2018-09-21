@@ -16,11 +16,11 @@ export class VoteService {
     this.voteCollection = this.afs.collection<VoteCollection>('vote');
   }
 
-  trackVote(payload: VotePayload): Observable<VoteInfo> {
+  trackVote(payload: VotePayload, votedOn = new Date().getTime()): Observable<VoteInfo> {
     const newItem: FirestoreVoteItem = {
       pollId: payload.pollId,
       option: payload.option,
-      votedOn: new Date().getTime()
+      votedOn
     };
     this.getUserVoteCollection(payload.userId).doc(payload.pollId).set(newItem);
     return of(newItem);
