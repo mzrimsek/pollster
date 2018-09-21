@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
 import { OptionComponent } from './components/option/option.component';
 import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
@@ -25,13 +27,15 @@ describe('PollComponent', () => {
       declarations: [
         PollComponent,
         VoteComponent,
-        OptionComponent
+        OptionComponent,
+        AlreadyVotedComponent
       ],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
-        })
+        }),
+        RouterTestingModule
       ],
       providers: [
         { provide: ActivatedRoute, useValue: routing.activatedRouteStub },
