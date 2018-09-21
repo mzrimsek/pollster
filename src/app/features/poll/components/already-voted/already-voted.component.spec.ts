@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AlreadyVotedComponent } from './already-voted.component';
 
@@ -8,18 +9,33 @@ describe('AlreadyVotedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlreadyVotedComponent ]
+      declarations: [AlreadyVotedComponent],
+      imports: [RouterTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlreadyVotedComponent);
     component = fixture.componentInstance;
+
+    component.voteInfo = {
+      pollId: 'someId',
+      option: 'some option',
+      votedOn: 10000
+    };
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('getResultsLink', () => {
+    it('Should return routing information', () => {
+      const result = component.getResultsLink();
+      expect(result).toEqual(['/results/someId']);
+    });
   });
 });
