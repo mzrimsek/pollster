@@ -15,6 +15,7 @@ import { AuthModule } from './features/auth/auth.module';
 import { CreateModule } from './features/create/create.module';
 import { HomeModule } from './features/home/home.module';
 import { PollModule } from './features/poll/poll.module';
+import { ResultsModule } from './features/results/results.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -43,7 +44,8 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot([]),
     HomeModule,
     CreateModule,
-    PollModule
+    PollModule,
+    ResultsModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
   bootstrap: [AppComponent]

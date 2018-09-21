@@ -5,15 +5,14 @@ import { Poll } from '../../../../shared/models';
 import { getOptionsFrom } from '../../../../shared/utils/option.utils';
 
 @Component({
-  selector: 'app-poll-vote',
-  templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.scss'],
+  selector: 'app-results-results-view',
+  templateUrl: './results-view.component.html',
+  styleUrls: ['./results-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VoteComponent implements OnInit {
+export class ResultsViewComponent implements OnInit {
 
   @Input() poll: Poll;
-  @Input() pollId = '';
   constructor() { }
 
   ngOnInit() { }

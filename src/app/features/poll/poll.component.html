@@ -2,8 +2,6 @@
   <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
                  [pollId]="pollId"
                  [poll]="poll$ | async"></app-poll-vote>
-  <div class="voteInfo"
-       *ngIf="(voteInfo$ | async)[pollId]">
-    You voted for {{ (voteInfo$ | async)[pollId].option }} on {{ (voteInfo$ | async)[pollId].votedOn | date:'short' }}
-  </div>
+  <app-poll-already-voted *ngIf="(voteInfo$ | async)[pollId]"
+                          [voteInfo]="(voteInfo$ | async)[pollId]"></app-poll-already-voted>
 </div>

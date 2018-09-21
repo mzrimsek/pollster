@@ -8,9 +8,9 @@ describe('ResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ResultsComponent]
+      declarations: [ ResultsComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('ResultsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
