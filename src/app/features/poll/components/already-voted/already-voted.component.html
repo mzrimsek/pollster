@@ -1,0 +1,9 @@
+<div class="already-voted">
+  <div class="caption">
+    You voted for {{ voteInfo.option }} on {{ voteInfo.votedOn | date:'short' }}
+
+  </div>
+  <div class="results">
+    <a [routerLink]="getResultsLink()">View Results</a>
+  </div>
+</div>

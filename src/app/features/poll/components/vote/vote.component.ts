@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { Poll } from '../../../../shared/models';
 
+import { getOptionsFrom } from '../../../../shared/utils/option.utils';
+
 @Component({
   selector: 'app-poll-vote',
   templateUrl: './vote.component.html',
@@ -17,6 +19,6 @@ export class VoteComponent implements OnInit {
   ngOnInit() { }
 
   getPollOptions(): string[] {
-    return Object.entries(this.poll.options).map(([key]) => key);
+    return getOptionsFrom(this.poll);
   }
 }

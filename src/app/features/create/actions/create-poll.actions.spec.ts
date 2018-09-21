@@ -1,6 +1,6 @@
 import * as actions from './create-poll.actions';
 
-import { Poll } from '../../../shared/models';
+import { poll } from '../../../test-helpers';
 
 describe('Create Poll Actions', () => {
   describe('SetTitle', () => {
@@ -69,29 +69,25 @@ describe('Create Poll Actions', () => {
   });
 
   describe('Save', () => {
-    const poll: Poll = {
-      title: '',
-      selectionMode: 'SINGLE',
-      validUntil: null,
-      options: {},
-      createdAt: 10000,
-      createdBy: 'Anonymous'
-    };
-
     it('Should have correct type', () => {
-      const action = new actions.Save(poll);
+      const action = new actions.Save(poll.testPoll);
       expect(action.type).toBe(actions.SAVE);
     });
 
     it('Should have correct poll', () => {
-      const action = new actions.Save(poll);
+      const action = new actions.Save(poll.testPoll);
       expect(action.poll).toEqual({
-        title: '',
+        title: 'Lunch',
+        options: {
+          'Chipotle': 0,
+          'Sheetz': 0,
+          'Pulp': 0
+        },
         selectionMode: 'SINGLE',
-        validUntil: null,
-        options: {},
         createdAt: 10000,
-        createdBy: 'Anonymous'
+        createdByName: 'Anonymous',
+        createdByUid: 'Some UserId',
+        validUntil: null
       });
     });
   });

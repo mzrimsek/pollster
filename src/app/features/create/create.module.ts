@@ -13,6 +13,7 @@ import { CreateComponent } from './create.component';
 import { CreatePollEffects } from './effects/create-poll.effects';
 
 import { PollService } from '../../shared/services/poll.service';
+import { UserService } from '../auth/services/user.service';
 
 import { reducers } from './reducers/root.reducer';
 
@@ -24,6 +25,6 @@ import { reducers } from './reducers/root.reducer';
     EffectsModule.forFeature([CreatePollEffects])
   ],
   declarations: [CreateComponent, CreatePollComponent, OptionComponent],
-  providers: [PollService],
+  providers: [PollService, UserService],
 })
 export class CreateModule { }

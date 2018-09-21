@@ -4,15 +4,20 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { OptionComponent } from './option.component';
 
+import { UserService } from '../../../auth/services/user.service';
+
 import * as voteActions from '../../actions/vote.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromPoll from '../../reducers/root.reducer';
 
+import { user } from '../../../../test-helpers';
+
 describe('OptionComponent', () => {
   let component: OptionComponent;
   let fixture: ComponentFixture<OptionComponent>;
   let store: Store<fromRoot.State>;
+  let service: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,7 +27,8 @@ describe('OptionComponent', () => {
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
         })
-      ]
+      ],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }]
     }).compileComponents();
   }));
 
@@ -33,6 +39,7 @@ describe('OptionComponent', () => {
     component.option = 'Chipotle';
     component.value = 0;
 
+    service = TestBed.get(UserService);
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
 
@@ -41,6 +48,10 @@ describe('OptionComponent', () => {
 
   it('Should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Should call userService getUser', () => {
+    expect(service.getUser).toHaveBeenCalled();
   });
 
   describe('When vote button clicked', () => {
@@ -54,7 +65,8 @@ describe('OptionComponent', () => {
       voteButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new voteActions.Vote({
         pollId: 'Some PollId',
-        option: 'Chipotle'
+        option: 'Chipotle',
+        userId: user.testUser.uid
       }));
     });
   });

@@ -17,10 +17,11 @@ export const reducers: ActionReducerMap<PollState, any> = {
 export const _selectPollState = createFeatureSelector<PollState>('poll');
 export const _selectVote = createSelector(_selectPollState, state => state.vote);
 
-export const _selectVoteSucceeded = createSelector(_selectVote, vote => vote.voteSucceeded);
+export const { selectEntities: _selectVoteInfo } = fromVote.adapter.getSelectors(_selectVote);
+
 
 const pollSelectors = {
-  voteSucceeded: _selectVoteSucceeded
+  voteInfo: _selectVoteInfo
 };
 
 export default pollSelectors;
