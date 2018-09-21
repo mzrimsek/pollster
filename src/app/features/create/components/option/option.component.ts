@@ -21,7 +21,7 @@ export class OptionComponent implements OnInit {
 
   ngOnInit() { }
 
-  removeOption(optionId: number) {
-    this.store.dispatch(new actions.RemoveOption(optionId));
+  removeOption() {
+    this.store.dispatch(new actions.RemoveOption(this.option.id));
   }
 }
