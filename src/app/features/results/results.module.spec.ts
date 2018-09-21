@@ -7,7 +7,7 @@ describe('ResultsModule', () => {
     resultsModule = new ResultsModule();
   });
 
-  it('should create an instance', () => {
+  it('Should create an instance', () => {
     expect(resultsModule).toBeTruthy();
   });
 });
