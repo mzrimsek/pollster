@@ -39,6 +39,7 @@ export class CreatePollComponent implements OnInit {
     if (addOptionEl.value) {
       this.store.dispatch(new actions.AddOption(this.optionId++, addOptionEl.value));
       addOptionEl.value = '';
+      addOptionEl.focus();
     }
   }
 
