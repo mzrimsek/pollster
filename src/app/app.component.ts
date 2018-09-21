@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -11,15 +11,11 @@ import { State } from './reducers/root.reducer';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
     this.store.dispatch(new userActions.AnonymousLogin());
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(new userActions.Logout());
   }
 }

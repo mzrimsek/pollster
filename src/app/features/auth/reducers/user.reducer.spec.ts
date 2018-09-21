@@ -13,13 +13,13 @@ describe('User Reducer', () => {
       photoURL: '',
       providerId: ''
     };
-    const newState = reducer(initialState, new actions.Authenticated(user.mockUser));
-    expect(newState).toEqual(user.mockUser);
+    const newState = reducer(initialState, new actions.Authenticated(user.testUser));
+    expect(newState).toEqual(user.testUser);
   });
 
   it('Should clear user data when NotAuthenticated is dispatched', () => {
     const initialState: State = {
-      ...user.mockUser
+      ...user.testUser
     };
     const notAuthenticatedAction = new actions.NotAuthenticated();
 

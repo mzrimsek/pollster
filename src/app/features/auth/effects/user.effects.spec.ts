@@ -52,7 +52,7 @@ describe('User Effects', () => {
       it('Should dispatch Authenticated', () => {
         actions = hot('-a', { a: new userActions.GetUser() });
         const expected = cold('-(b)', {
-          b: new userActions.Authenticated(user.mockUser)
+          b: new userActions.Authenticated(user.testUser)
         });
         expect(effects.getUser$).toBeObservable(expected);
       });
@@ -92,43 +92,6 @@ describe('User Effects', () => {
       spyOn(authService, 'getAuthState').and.callThrough();
       effects.getUser$.subscribe(() => {
         expect(authService.getAuthState).toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('Logout', () => {
-    beforeEach(() => {
-      initTests();
-    });
-
-    it('Should dispatch NotAuthenticated', () => {
-      actions = hot('-a', { a: new userActions.Logout() });
-      const expected = cold('-(b)', {
-        b: new userActions.NotAuthenticated()
-      });
-
-      expect(effects.logout$).toBeObservable(expected);
-    });
-
-    it('Should dispatch Error on error', () => {
-      const message = 'Something went terribly wrong';
-      actions = hot('-a', { a: new userActions.Logout() });
-
-      const expected = cold('-(b)', {
-        b: new appActions.Error(userActions.LOGOUT, message)
-      });
-
-      spyOn(authService, 'signOut').and.callFake(() => throwError({ message }));
-      expect(effects.logout$).toBeObservable(expected);
-    });
-
-    it('Should call AuthService signOut', () => {
-      actions = new ReplaySubject(1);
-      actions.next(new userActions.Logout());
-
-      spyOn(authService, 'signOut').and.callThrough();
-      effects.logout$.subscribe(() => {
-        expect(authService.signOut).toHaveBeenCalled();
       });
     });
   });

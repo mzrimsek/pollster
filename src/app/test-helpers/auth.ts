@@ -8,8 +8,8 @@ export namespace auth {
   export const fakeAuthState = new BehaviorSubject<any>(null);
 
   const fakeSignInHandler = (): Promise<any> => {
-    fakeAuthState.next(user.mockUser);
-    return Promise.resolve(user.mockUser);
+    fakeAuthState.next(user.testUser);
+    return Promise.resolve(user.testUser);
   };
   const fakeSignOutHandler = (): Promise<any> => {
     fakeAuthState.next(null);
@@ -42,9 +42,9 @@ export namespace auth {
 
     signInAnonymously(): Observable<any> {
       this.authState = of({
-        ...user.mockUser,
+        ...user.testUser,
         providerData: [{
-          ...user.mockUser
+          ...user.testUser
         }]
       });
       return of('Logged in anonymously');

@@ -66,7 +66,7 @@ describe('OptionComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(new voteActions.Vote({
         pollId: 'Some PollId',
         option: 'Chipotle',
-        userId: user.mockUser.uid
+        userId: user.testUser.uid
       }));
     });
   });

@@ -1,33 +1,21 @@
-import { _selectUserLoggedIn, AuthState, State } from './root.reducer';
+import { _selectUserData, AuthState, State } from './root.reducer';
 
 import { user } from '../../../test-helpers';
 
 describe('Auth Root Reducer', () => {
   describe('User State Selectors', () => {
-    describe('_selectUserLoggedIn', () => {
-      it('Should return true if uid is set', () => {
+    describe('_selectUserData', () => {
+      it('Should return user data', () => {
         const authState: AuthState = {
           user: {
-            ...user.initialUserState,
-            uid: 'some uid'
+            ...user.initialUserState
           }
         };
         const state: State = { auth: authState };
 
-        const result = _selectUserLoggedIn(state);
+        const result = _selectUserData(state);
 
-        expect(result).toBe(true);
-      });
-
-      it('Should return false if uid is not set', () => {
-        const authState: AuthState = {
-          user: user.initialUserState
-        };
-        const state: State = { auth: authState };
-
-        const result = _selectUserLoggedIn(state);
-
-        expect(result).toBe(false);
+        expect(result).toEqual(user.initialUserState);
       });
     });
   });

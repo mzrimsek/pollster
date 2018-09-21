@@ -26,14 +26,7 @@ export class AnonymousLogin implements Action {
   constructor() { }
 }
 
-export const LOGOUT = '[User] Logout';
-export class Logout implements Action {
-  readonly type = LOGOUT;
-  constructor() { }
-}
-
 export type All = GetUser |
   Authenticated |
   NotAuthenticated |
-  AnonymousLogin |
-  Logout;
+  AnonymousLogin;

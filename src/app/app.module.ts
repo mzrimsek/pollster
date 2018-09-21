@@ -19,12 +19,9 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 
-import { clearState } from './reducers/clear.meta.reducer';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
-
-const metaReducers: MetaReducer<any>[] = [clearState];
 
 @NgModule({
   declarations: [
@@ -38,7 +35,7 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router'
     }),

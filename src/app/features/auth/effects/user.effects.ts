@@ -43,16 +43,6 @@ export class UserEffects {
             map(() => new authActions.GetUser()),
             catchError(err => of(new appActions.Error(authActions.ANONYMOUS_LOGIN, err.message))))));
 
-  @Effect() logout$ =
-    this.actions$
-      .ofType(authActions.LOGOUT)
-      .pipe(
-        map(action => action as authActions.Logout),
-        switchMap(() => this.authService.signOut()
-          .pipe(
-            map(() => new authActions.NotAuthenticated()),
-            catchError(err => of(new appActions.Error(authActions.LOGOUT, err.message))))));
-
   private getAuthenticatedAction(authData: AuthUser): authActions.Authenticated {
     const providerData = authData.providerData[0];
     const user = <User>{

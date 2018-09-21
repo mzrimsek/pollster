@@ -23,8 +23,8 @@ describe('User Actions', () => {
     });
 
     it('Should have correct user', () => {
-      const action = new actions.Authenticated(user.mockUser);
-      expect(action.user).toEqual(user.mockUser);
+      const action = new actions.Authenticated(user.testUser);
+      expect(action.user).toEqual(user.testUser);
     });
   });
 
@@ -35,24 +35,10 @@ describe('User Actions', () => {
     });
   });
 
-  describe('GetUser', () => {
-    it('Should have correct type', () => {
-      const action = new actions.Logout();
-      expect(action.type).toBe(actions.LOGOUT);
-    });
-  });
-
   describe('AnonymousAuth', () => {
     it('Should have correct type', () => {
       const action = new actions.AnonymousLogin();
       expect(action.type).toBe(actions.ANONYMOUS_LOGIN);
-    });
-  });
-
-  describe('Logout', () => {
-    it('Should have correct type', () => {
-      const action = new actions.Logout();
-      expect(action.type).toBe(actions.LOGOUT);
     });
   });
 });

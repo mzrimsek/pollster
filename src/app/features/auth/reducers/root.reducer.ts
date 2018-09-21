@@ -19,12 +19,10 @@ export const reducers: ActionReducerMap<AuthState, any> = {
 export const _selectAuthState = createFeatureSelector<AuthState>('auth');
 export const _selectUser = createSelector(_selectAuthState, state => state.user);
 
-export const _selectUserLoggedIn = createSelector(_selectUser, user => user.uid !== '');
 export const _selectUserData = createSelector(_selectUser, user => user as User);
 
 const authComponentSelectors = {
-  isUserLoggedIn: _selectUserLoggedIn,
-  user: _selectUserData,
+  user: _selectUserData
 };
 
 export default authComponentSelectors;
