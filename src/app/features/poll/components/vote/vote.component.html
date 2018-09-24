@@ -4,9 +4,14 @@
 
   <ul>
     <li *ngFor="let option of getPollOptions()">
-      <app-poll-option [pollId]="pollId"
-                       [option]="option"
-                       [value]="poll.options[option]"></app-poll-option>
+      <input type="radio"
+             name="options"
+             [value]="option"
+             ([ngModel])="selectedOption"
+             (change)="setOption(option)"> {{ option }}
     </li>
   </ul>
+
+  <button [disabled]="selectedOption === ''"
+          (click)="vote()">Vote</button>
 </div>

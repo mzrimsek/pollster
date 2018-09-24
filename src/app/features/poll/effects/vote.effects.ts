@@ -9,6 +9,7 @@ import { PollService } from '../../../shared/services/poll.service';
 import { VoteService } from '../services/vote.service';
 
 import * as appActions from '../../../actions/app.actions';
+import * as voteInfoActions from '../actions/vote-info.actions';
 import * as voteActions from '../actions/vote.actions';
 
 @Injectable()
@@ -32,27 +33,27 @@ export class VoteEffects {
       .ofType(voteActions.VOTE_SUCCEEDED)
       .pipe(
         map(action => action as voteActions.VoteSucceeded),
-        map(action => new voteActions.TrackVote(action.payload)));
+        map(action => new voteInfoActions.TrackVote(action.payload)));
 
 
   @Effect() trackVote$ =
     this.actions$
-      .ofType(voteActions.TRACK_VOTE)
+      .ofType(voteInfoActions.TRACK_VOTE)
       .pipe(
-        map(action => action as voteActions.TrackVote),
+        map(action => action as voteInfoActions.TrackVote),
         map(action => action.payload),
         switchMap(payload => this.voteService.trackVote(payload)
           .pipe(
-            map(data => new voteActions.TrackVoteSucceeded(data)),
-            catchError(err => of(new appActions.Error(voteActions.TRACK_VOTE, err.message))))));
+            map(data => new voteInfoActions.TrackVoteSucceeded(data)),
+            catchError(err => of(new appActions.Error(voteInfoActions.TRACK_VOTE, err.message))))));
 
   @Effect() loadVoteInfo$ =
     this.actions$
-      .ofType(voteActions.LOAD_VOTE_INFO)
+      .ofType(voteInfoActions.LOAD_VOTE_INFO)
       .pipe(
-        map(action => action as voteActions.LoadVoteInfo),
+        map(action => action as voteInfoActions.LoadVoteInfo),
         switchMap(action => this.voteService.getVotesForUser(action.userId)
           .pipe(
-            map(votes => new voteActions.LoadVoteInfoSucceeded(votes)),
-            catchError(err => of(new appActions.Error(voteActions.LOAD_VOTE_INFO, err.message))))));
+            map(votes => new voteInfoActions.LoadVoteInfoSucceeded(votes)),
+            catchError(err => of(new appActions.Error(voteInfoActions.LOAD_VOTE_INFO, err.message))))));
 }

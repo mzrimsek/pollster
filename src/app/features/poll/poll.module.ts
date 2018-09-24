@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from '../../app-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { OptionComponent } from './components/option/option.component';
+import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
 import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
 
@@ -17,7 +17,6 @@ import { PollService } from '../../shared/services/poll.service';
 import { VoteService } from './services/vote.service';
 
 import { reducers } from './reducers/root.reducer';
-import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
 
 @NgModule({
   imports: [
@@ -30,7 +29,6 @@ import { AlreadyVotedComponent } from './components/already-voted/already-voted.
   declarations: [
     PollComponent,
     VoteComponent,
-    OptionComponent,
     AlreadyVotedComponent
   ],
   providers: [

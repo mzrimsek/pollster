@@ -11,6 +11,7 @@ import { PollService } from '../../../shared/services/poll.service';
 import { VoteService } from '../services/vote.service';
 
 import * as appActions from '../../../actions/app.actions';
+import * as voteInfoActions from '../actions/vote-info.actions';
 import * as voteActions from '../actions/vote.actions';
 
 import { poll, vote } from '../../../test-helpers';
@@ -76,7 +77,7 @@ describe('Vote Effects', () => {
     it('Should dispatch TrackVote', () => {
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new voteActions.TrackVote(vote.testPayload)
+        b: new voteInfoActions.TrackVote(vote.testPayload)
       });
 
       expect(effects.voteSucceeded$).toBeObservable(expected);
@@ -84,12 +85,12 @@ describe('Vote Effects', () => {
   });
 
   describe('Track Vote', () => {
-    const action = new voteActions.TrackVote(vote.testPayload);
+    const action = new voteInfoActions.TrackVote(vote.testPayload);
 
     it('Should dispatch TrackVoteSucceeded', () => {
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new voteActions.TrackVoteSucceeded(vote.testVoteInfo)
+        b: new voteInfoActions.TrackVoteSucceeded(vote.testVoteInfo)
       });
 
       expect(effects.trackVote$).toBeObservable(expected);
@@ -100,7 +101,7 @@ describe('Vote Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new appActions.Error(voteActions.TRACK_VOTE, message)
+        b: new appActions.Error(voteInfoActions.TRACK_VOTE, message)
       });
       spyOn(voteService, 'trackVote').and.callFake(() => throwError({ message }));
       expect(effects.trackVote$).toBeObservable(expected);
@@ -118,12 +119,12 @@ describe('Vote Effects', () => {
   });
 
   describe('Load Vote Info', () => {
-    const action = new voteActions.LoadVoteInfo('uid');
+    const action = new voteInfoActions.LoadVoteInfo('uid');
 
     it('Should dispatch LoadVoteInfoSucceeded', () => {
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new voteActions.LoadVoteInfoSucceeded([vote.testVoteInfo])
+        b: new voteInfoActions.LoadVoteInfoSucceeded([vote.testVoteInfo])
       });
 
       expect(effects.loadVoteInfo$).toBeObservable(expected);
@@ -134,7 +135,7 @@ describe('Vote Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new appActions.Error(voteActions.LOAD_VOTE_INFO, message)
+        b: new appActions.Error(voteInfoActions.LOAD_VOTE_INFO, message)
       });
       spyOn(voteService, 'getVotesForUser').and.callFake(() => throwError({ message }));
       expect(effects.loadVoteInfo$).toBeObservable(expected);
