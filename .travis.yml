@@ -18,7 +18,7 @@ before_script:
   - npm install coveralls
 
 script:
-  - ng test --watch=false --code-coverage
+  - ng test --watch=false --source-map=false --code-coverage
   - ng e2e
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod --aot; fi
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
