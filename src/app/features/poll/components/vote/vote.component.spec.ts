@@ -68,13 +68,10 @@ describe('VoteComponent', () => {
   });
 
   describe('When voteButton is clicked', () => {
-    beforeEach(() => {
-      component.selectedOption = 'Chipotle';
-      fixture.detectChanges();
-    });
-
     it('Should dispatch Vote', () => {
+      component.selectedOption = 'Chipotle';
       const voteButton = fixture.nativeElement.querySelector('.vote button');
+      voteButton.disabled = false;
       voteButton.click();
 
       expect(store.dispatch).toHaveBeenCalledWith(new voteActions.Vote({
