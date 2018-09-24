@@ -2,7 +2,7 @@
      *ngIf="poll">
   {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
 
-  <ul>
+  <ul class="options">
     <li *ngFor="let option of getPollOptions()">
       <input type="radio"
              name="options"

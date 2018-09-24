@@ -11,6 +11,7 @@ import { AlreadyVotedComponent } from './components/already-voted/already-voted.
 import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
 
+import { VoteInfoEffects } from './effects/vote-info.effects';
 import { VoteEffects } from './effects/vote.effects';
 
 import { PollService } from '../../shared/services/poll.service';
@@ -24,7 +25,7 @@ import { reducers } from './reducers/root.reducer';
     AppRoutingModule,
     SharedModule,
     StoreModule.forFeature('poll', reducers),
-    EffectsModule.forFeature([VoteEffects])
+    EffectsModule.forFeature([VoteEffects, VoteInfoEffects])
   ],
   declarations: [
     PollComponent,
