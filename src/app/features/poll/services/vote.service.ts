@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
 
-import { VoteInfoEntity } from '../reducers/vote.reducer';
+import { VoteInfoEntity } from '../reducers/vote-info.reducer';
 
 import { VotePayload } from '../../../shared/models';
 import { VoteInfo } from '../models';

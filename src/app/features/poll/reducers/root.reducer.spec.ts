@@ -1,11 +1,11 @@
-import { _selectVoteInfo, PollState, State } from './root.reducer';
+import { _selectVoteInfoEntities, _selectVoteOption, PollState, State } from './root.reducer';
 
 describe('Poll Root Reducer', () => {
-  describe('Vote Selectors', () => {
-    describe('_selectVoteInfo', () => {
+  describe('Vote Info Selectors', () => {
+    describe('_selectVoteInfoEntities', () => {
       it('Should return dictionary of items', () => {
         const pollState: PollState = {
-          vote: {
+          voteInfo: {
             ids: ['abcde'],
             entities: {
               'abcde': {
@@ -14,11 +14,14 @@ describe('Poll Root Reducer', () => {
                 votedOn: 10000
               }
             }
+          },
+          vote: {
+            option: ''
           }
         };
         const state: State = { poll: pollState };
 
-        const result = _selectVoteInfo(state);
+        const result = _selectVoteInfoEntities(state);
 
         expect(result).toEqual({
           'abcde': {
@@ -27,6 +30,27 @@ describe('Poll Root Reducer', () => {
             votedOn: 10000
           }
         });
+      });
+    });
+  });
+
+  describe('Vote Selectors', () => {
+    describe('_selectVoteOption', () => {
+      it('Should return vote option', () => {
+        const pollState: PollState = {
+          voteInfo: {
+            ids: [],
+            entities: {}
+          },
+          vote: {
+            option: 'Option'
+          }
+        };
+        const state: State = { poll: pollState };
+
+        const result = _selectVoteOption(state);
+
+        expect(result).toBe('Option');
       });
     });
   });
