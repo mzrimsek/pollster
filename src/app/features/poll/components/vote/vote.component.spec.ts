@@ -4,6 +4,8 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { VoteComponent } from './vote.component';
 
+import { UserService } from '../../../auth/services/user.service';
+
 import * as voteActions from '../../actions/vote.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
@@ -24,7 +26,8 @@ describe('VoteComponent', () => {
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
         })
-      ]
+      ],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }]
     }).compileComponents();
   }));
 
@@ -65,10 +68,12 @@ describe('VoteComponent', () => {
   });
 
   describe('When voteButton is clicked', () => {
-    it('Should dispatch Vote', () => {
+    beforeEach(() => {
       component.selectedOption = 'Chipotle';
       fixture.detectChanges();
+    });
 
+    it('Should dispatch Vote', () => {
       const voteButton = fixture.nativeElement.querySelector('.vote button');
       voteButton.click();
 
