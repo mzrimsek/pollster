@@ -2,11 +2,28 @@
      *ngIf="poll">
   {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
 
-  <ul>
+  <ul class="options">
     <li *ngFor="let option of getPollOptions()">
-      <app-poll-option [pollId]="pollId"
-                       [option]="option"
-                       [value]="poll.options[option]"></app-poll-option>
+      <div *ngIf="poll.selectionMode === 'SINGLE'"
+           class="option">
+        <input type="radio"
+               name="options"
+               [value]="option"
+               ([ngModel])="selectedOptions[0]"
+               (change)="setOptions(option)"> {{ option }}
+      </div>
+
+      <div *ngIf="poll.selectionMode === 'MULTI'"
+           class="option">
+        <input type="checkbox"
+               name="options"
+               [value]="option"
+               ([ngModel])="selectedOptions.indexOf(option) !== -1"
+               (change)="setOptions(option)"> {{ option }}
+      </div>
     </li>
   </ul>
+
+  <button [disabled]="selectedOptions.length === 0"
+          (click)="vote()">Vote</button>
 </div>

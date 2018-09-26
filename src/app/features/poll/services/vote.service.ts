@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
 
-import { VoteInfoEntity } from '../reducers/vote.reducer';
+import { VoteInfoEntity } from '../reducers/vote-info.reducer';
 
 import { VotePayload } from '../../../shared/models';
 import { VoteInfo } from '../models';
@@ -19,7 +19,7 @@ export class VoteService {
   trackVote(payload: VotePayload, votedOn = new Date().getTime()): Observable<VoteInfo> {
     const newItem: FirestoreVoteItem = {
       pollId: payload.pollId,
-      option: payload.option,
+      options: payload.options,
       votedOn
     };
     this.getUserVoteCollection(payload.userId).doc(payload.pollId).set(newItem);
@@ -37,7 +37,7 @@ export class VoteService {
 
 export interface FirestoreVoteItem {
   pollId: string;
-  option: string;
+  options: string[];
   votedOn: number;
 }
 

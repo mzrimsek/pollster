@@ -7,7 +7,7 @@ import { cold, hot } from 'jasmine-marbles';
 import { InitEffects } from './init.effects';
 
 import * as userActions from '../../auth/actions/user.actions';
-import * as voteActions from '../../poll/actions/vote.actions';
+import * as voteInfoActions from '../../poll/actions/vote-info.actions';
 
 describe('Init Effects', () => {
   let actions: any;
@@ -41,7 +41,7 @@ describe('Init Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new voteActions.LoadVoteInfo(uid)
+        b: new voteInfoActions.LoadVoteInfo(uid)
       });
 
       expect(effects.authenticated$).toBeObservable(expected);

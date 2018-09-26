@@ -8,7 +8,7 @@ import * as actions from '../../actions/create-poll.actions';
 
 import { State } from '../../reducers/root.reducer';
 
-import { Poll } from '../../../../shared/models';
+import { Poll, SelectionMode } from '../../../../shared/models';
 import { User } from '../../../auth/models';
 import { CreatePollInfo } from '../../models';
 
@@ -36,11 +36,17 @@ export class CreatePollComponent implements OnInit {
   }
 
   addOption(addOptionEl: HTMLInputElement) {
-    if (addOptionEl.value) {
+    const existingValue = this.info.options.find(x => x.value === addOptionEl.value);
+    if (!existingValue && addOptionEl.value) {
       this.store.dispatch(new actions.AddOption(this.optionId++, addOptionEl.value));
       addOptionEl.value = '';
       addOptionEl.focus();
     }
+  }
+
+  setSelectionMode(selectionModeEl: HTMLInputElement) {
+    const selectionMode: SelectionMode = selectionModeEl.checked ? 'MULTI' : 'SINGLE';
+    this.store.dispatch(new actions.SetMode(selectionMode));
   }
 
   save() {

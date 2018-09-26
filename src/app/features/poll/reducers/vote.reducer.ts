@@ -1,26 +1,20 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
 import * as actions from '../actions/vote.actions';
 
-export interface VoteInfoEntity {
-  pollId: string;
-  option: string;
-  votedOn: number;
+export interface State {
+  options: string[];
 }
 
-export interface State extends EntityState<VoteInfoEntity> { }
-export const adapter: EntityAdapter<VoteInfoEntity> = createEntityAdapter<VoteInfoEntity>({
-  selectId: (entity) => entity.pollId
-});
-const inititalState = adapter.getInitialState();
+const initialState: State = {
+  options: []
+};
 
-export function reducer(state = inititalState, action: actions.All): State {
+export function reducer(state = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.TRACK_VOTE_SUCCEEDED: {
-      return adapter.addOne(action.info, state);
-    }
-    case actions.LOAD_VOTE_INFO_SUCCEEDED: {
-      return adapter.addAll(action.info, state);
+    case actions.SET_VOTE_OPTIONS: {
+      return {
+        ...state,
+        options: action.options
+      };
     }
     default: {
       return state;

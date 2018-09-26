@@ -106,37 +106,92 @@ describe('CreatePollComponent', () => {
     let saveButton: any;
 
     beforeEach(() => {
-      component.info = {
-        title: 'Some Title',
-        selectionMode: 'SINGLE',
-        validUntil: null,
-        options: [{
-          id: 1,
-          value: 'Option 1'
-        }, {
-          id: 2,
-          value: 'Option 2'
-        }]
-      };
       saveButton = fixture.nativeElement.querySelector('.create-poll .save button');
-
       spyOn(component, 'getNowTime').and.returnValue(10000);
     });
 
-    it('Should dispatch Save', () => {
-      saveButton.click();
-      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.Save({
-        title: 'Some Title',
-        selectionMode: 'SINGLE',
-        validUntil: null,
-        options: {
-          'Option 1': 0,
-          'Option 2': 0
-        },
-        createdAt: 10000,
-        createdByName: 'Anonymous',
-        createdByUid: 'some uid'
-      }));
+    describe('When in invalid state', () => {
+      it('Should not dispatch Save when title is empty', () => {
+        component.info = {
+          title: '',
+          selectionMode: 'SINGLE',
+          validUntil: null,
+          options: [{
+            id: 1,
+            value: 'Option 1'
+          }, {
+            id: 2,
+            value: 'Option 2'
+          }]
+        };
+        saveButton.click();
+        expect(store.dispatch).not.toHaveBeenCalled();
+      });
+
+      it('Should not dispatch Save when less than two options', () => {
+        component.info = {
+          title: 'Some Title',
+          selectionMode: 'SINGLE',
+          validUntil: null,
+          options: [{
+            id: 1,
+            value: 'Option 1'
+          }]
+        };
+        saveButton.click();
+        expect(store.dispatch).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('When in valid state', () => {
+      it('Should dispatch Save', () => {
+        component.info = {
+          title: 'Some Title',
+          selectionMode: 'SINGLE',
+          validUntil: null,
+          options: [{
+            id: 1,
+            value: 'Option 1'
+          }, {
+            id: 2,
+            value: 'Option 2'
+          }]
+        };
+        saveButton.disabled = false;
+        saveButton.click();
+        expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.Save({
+          title: 'Some Title',
+          selectionMode: 'SINGLE',
+          validUntil: null,
+          options: {
+            'Option 1': 0,
+            'Option 2': 0
+          },
+          createdAt: 10000,
+          createdByName: 'Anonymous',
+          createdByUid: 'some uid'
+        }));
+      });
+    });
+  });
+
+  describe('When selectionMode input element changes', () => {
+    let selectionModeElement: any;
+
+    beforeEach(() => {
+      selectionModeElement = fixture.nativeElement.querySelector('.create-poll .selection-mode input');
+    });
+
+    it('Should dispatch setMode with "SINGLE" when unchecked', () => {
+      selectionModeElement.checked = false;
+      selectionModeElement.dispatchEvent(new Event('change'));
+      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.SetMode('SINGLE'));
+    });
+
+    it('Should dispatch setMode with "MULTI" when checked', () => {
+      selectionModeElement.checked = true;
+      selectionModeElement.dispatchEvent(new Event('change'));
+      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.SetMode('MULTI'));
     });
   });
 });

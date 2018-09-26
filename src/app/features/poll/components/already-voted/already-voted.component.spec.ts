@@ -21,7 +21,7 @@ describe('AlreadyVotedComponent', () => {
 
     component.voteInfo = {
       pollId: 'someId',
-      option: 'some option',
+      options: ['some option'],
       votedOn: 10000
     };
 
