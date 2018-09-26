@@ -1,5 +1,5 @@
 export interface VoteInfo {
   pollId: string;
-  option: string;
+  options: string[];
   votedOn: number;
 }

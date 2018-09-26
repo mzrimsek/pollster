@@ -6,8 +6,12 @@ import { CreatePollComponent } from './components/create-poll/create-poll.compon
 import { OptionComponent } from './components/option/option.component';
 import { CreateComponent } from './create.component';
 
+import { UserService } from '../auth/services/user.service';
+
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromCreate from './reducers/root.reducer';
+
+import { user } from '../../test-helpers';
 
 describe('CreateComponent', () => {
   let component: CreateComponent;
@@ -26,7 +30,8 @@ describe('CreateComponent', () => {
           ...fromRoot.reducers,
           'create': combineReducers(fromCreate.reducers)
         })
-      ]
+      ],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }]
     }).compileComponents();
   }));
 

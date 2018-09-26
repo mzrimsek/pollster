@@ -4,7 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import { map, mergeMap } from 'rxjs/operators';
 
-import * as voteActions from '../../poll/actions/vote.actions';
+import * as voteInfoActions from '../../poll/actions/vote-info.actions';
 import * as userActions from '../actions/user.actions';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class InitEffects {
       .pipe(
         map(action => action as userActions.Authenticated),
         mergeMap(action => [
-          new voteActions.LoadVoteInfo(action.user.uid)
+          new voteInfoActions.LoadVoteInfo(action.user.uid)
         ])
       );
 }

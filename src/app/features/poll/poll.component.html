@@ -1,7 +1,8 @@
 <div class="poll">
   <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
                  [pollId]="pollId"
-                 [poll]="poll$ | async"></app-poll-vote>
+                 [poll]="poll$ | async"
+                 [selectedOptions]="selectedOptions$ | async"></app-poll-vote>
   <app-poll-already-voted *ngIf="(voteInfo$ | async)[pollId]"
                           [voteInfo]="(voteInfo$ | async)[pollId]"></app-poll-already-voted>
 </div>

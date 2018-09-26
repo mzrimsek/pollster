@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -25,29 +26,30 @@ import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AuthModule,
-    SharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    StoreModule.forRoot(reducers),
-    StoreRouterConnectingModule.forRoot({
-      stateKey: 'router'
-    }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([]),
-    HomeModule,
-    CreateModule,
-    PollModule,
-    ResultsModule
-  ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        AuthModule,
+        SharedModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        StoreModule.forRoot(reducers),
+        StoreRouterConnectingModule.forRoot({
+            stateKey: 'router'
+        }),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        EffectsModule.forRoot([]),
+        HomeModule,
+        CreateModule,
+        PollModule,
+        ResultsModule
+    ],
+    providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

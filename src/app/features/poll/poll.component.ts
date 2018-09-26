@@ -23,16 +23,18 @@ export class PollComponent implements OnInit {
   pollId = '';
   poll$: Observable<Poll>;
   voteInfo$: Observable<Dictionary<VoteInfo>>;
+  selectedOptions$: Observable<string[]>;
   constructor(private store: Store<State>,
     private route: ActivatedRoute,
     private pollService: PollService) { }
 
   ngOnInit() {
     this.voteInfo$ = this.store.select(pollSelectors.voteInfo);
+    this.selectedOptions$ = this.store.select(pollSelectors.selectedOption);
+
     this.route.params.subscribe(params => {
       this.pollId = params.pollId;
       this.poll$ = this.pollService.getPoll(this.pollId);
     });
-
   }
 }

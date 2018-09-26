@@ -16,7 +16,7 @@ const initialState: State = {
   providerId: ''
 };
 
-export function reducer(state: State = initialState, action: actions.All): State {
+export function reducer(state = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.AUTHENTICATED: {
       return {
