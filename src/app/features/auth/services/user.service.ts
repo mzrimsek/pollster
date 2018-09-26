@@ -8,9 +8,7 @@ import authComponentSelectors, { State } from '../reducers/root.reducer';
 
 import { User } from '../models';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
 
   constructor(private store: Store<State>) { }

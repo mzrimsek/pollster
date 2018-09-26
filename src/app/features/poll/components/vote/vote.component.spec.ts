@@ -63,20 +63,20 @@ describe('VoteComponent', () => {
     it('Should dispatch SetVoteOption', () => {
       const firstOption = fixture.nativeElement.querySelector('.vote .options li:first-child input');
       firstOption.dispatchEvent(new Event('change'));
-      expect(store.dispatch).toHaveBeenCalledWith(new voteActions.SetVoteOptions('Chipotle'));
+      expect(store.dispatch).toHaveBeenCalledWith(new voteActions.SetVoteOptions(['Chipotle']));
     });
   });
 
   describe('When voteButton is clicked', () => {
     it('Should dispatch Vote', () => {
-      component.selectedOption = 'Chipotle';
+      component.selectedOptions = ['Chipotle'];
       const voteButton = fixture.nativeElement.querySelector('.vote button');
       voteButton.disabled = false;
       voteButton.click();
 
       expect(store.dispatch).toHaveBeenCalledWith(new voteActions.Vote({
         pollId: 'Some PollId',
-        options: 'Chipotle',
+        options: ['Chipotle'],
         userId: user.testUser.uid
       }));
     });

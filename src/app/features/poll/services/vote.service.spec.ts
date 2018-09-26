@@ -51,7 +51,7 @@ describe('VoteService', () => {
       result.subscribe(res => {
         expect(res).toEqual({
           pollId: vote.testPayload.pollId,
-          option: vote.testPayload.options,
+          options: vote.testPayload.options,
           votedOn: 10000
         });
       });
@@ -74,14 +74,14 @@ describe('VoteService', () => {
     it('Should return correct data', () => {
       vote.firestore.testVoteItems.push({
         pollId: 'some id',
-        option: 'some option',
+        options: ['some option'],
         votedOn: 10000
       });
       const result = service.getVotesForUser('user id');
       result.subscribe(res => {
         expect(res).toEqual([{
           pollId: 'some id',
-          option: 'some option',
+          options: ['some option'],
           votedOn: 10000
         }]);
       });

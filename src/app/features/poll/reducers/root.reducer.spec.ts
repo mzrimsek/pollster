@@ -10,13 +10,13 @@ describe('Poll Root Reducer', () => {
             entities: {
               'abcde': {
                 pollId: 'abcde',
-                option: 'some option',
+                options: ['some option'],
                 votedOn: 10000
               }
             }
           },
           vote: {
-            options: ''
+            options: ['']
           }
         };
         const state: State = { poll: pollState };
@@ -26,7 +26,7 @@ describe('Poll Root Reducer', () => {
         expect(result).toEqual({
           'abcde': {
             pollId: 'abcde',
-            option: 'some option',
+            options: ['some option'],
             votedOn: 10000
           }
         });
@@ -43,14 +43,14 @@ describe('Poll Root Reducer', () => {
             entities: {}
           },
           vote: {
-            options: 'Option'
+            options: ['Option']
           }
         };
         const state: State = { poll: pollState };
 
         const result = _selectVoteOption(state);
 
-        expect(result).toBe('Option');
+        expect(result).toEqual(['Option']);
       });
     });
   });

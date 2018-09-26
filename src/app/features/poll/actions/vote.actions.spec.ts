@@ -29,13 +29,13 @@ describe('Vote Actions', () => {
 
   describe('Set Vote Option', () => {
     it('Should have correct type', () => {
-      const action = new actions.SetVoteOptions('');
+      const action = new actions.SetVoteOptions(['']);
       expect(action.type).toBe(actions.SET_VOTE_OPTIONS);
     });
 
     it('Should have correct option', () => {
-      const action = new actions.SetVoteOptions('Option');
-      expect(action.options).toBe('Option');
+      const action = new actions.SetVoteOptions(['Option']);
+      expect(action.options).toEqual(['Option']);
     });
   });
 });

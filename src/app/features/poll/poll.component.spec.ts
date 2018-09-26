@@ -9,11 +9,12 @@ import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
 
 import { PollService } from '../../shared/services/poll.service';
+import { UserService } from '../auth/services/user.service';
 
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromPoll from './reducers/root.reducer';
 
-import { poll, routing } from '../../test-helpers';
+import { poll, routing, user } from '../../test-helpers';
 
 describe('PollComponent', () => {
   let component: PollComponent;
@@ -37,7 +38,8 @@ describe('PollComponent', () => {
       ],
       providers: [
         { provide: ActivatedRoute, useValue: routing.activatedRouteStub },
-        { provide: PollService, useClass: poll.MockPollService }
+        { provide: PollService, useClass: poll.MockPollService },
+        { provide: UserService, useValue: user.userServiceStub }
       ]
     }).compileComponents();
   }));

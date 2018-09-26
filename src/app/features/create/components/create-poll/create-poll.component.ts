@@ -37,7 +37,7 @@ export class CreatePollComponent implements OnInit {
 
   addOption(addOptionEl: HTMLInputElement) {
     const existingValue = this.info.options.find(x => x.value === addOptionEl.value);
-    if (!existingValue) {
+    if (!existingValue && addOptionEl.value) {
       this.store.dispatch(new actions.AddOption(this.optionId++, addOptionEl.value));
       addOptionEl.value = '';
       addOptionEl.focus();

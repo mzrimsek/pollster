@@ -9,12 +9,12 @@ export namespace vote {
   export const testPayload: VotePayload = {
     userId: 'Some UserId',
     pollId: 'Some PollId',
-    options: 'Chipotle'
+    options: ['Chipotle']
   };
 
   export const testVoteInfo: VoteInfo = {
     pollId: 'Some PollId',
-    option: 'Chipotle',
+    options: ['Chipotle'],
     votedOn: 10000
   };
 
