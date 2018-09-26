@@ -23,7 +23,7 @@ export const _selectVote = createSelector(_selectPollState, state => state.vote)
 
 export const { selectEntities: _selectVoteInfoEntities } = fromVoteInfo.adapter.getSelectors(_selectVoteInfo);
 
-export const _selectVoteOption = createSelector(_selectVote, vote => vote.option);
+export const _selectVoteOption = createSelector(_selectVote, vote => vote.options);
 
 const pollSelectors = {
   voteInfo: _selectVoteInfoEntities,

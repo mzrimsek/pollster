@@ -51,7 +51,7 @@ describe('VoteService', () => {
       result.subscribe(res => {
         expect(res).toEqual({
           pollId: vote.testPayload.pollId,
-          option: vote.testPayload.option,
+          option: vote.testPayload.options,
           votedOn: 10000
         });
       });

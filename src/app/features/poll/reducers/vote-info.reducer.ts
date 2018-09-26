@@ -4,7 +4,7 @@ import * as actions from '../actions/vote-info.actions';
 
 export interface VoteInfoEntity {
   pollId: string;
-  option: string;
+  options: string[];
   votedOn: number;
 }
 

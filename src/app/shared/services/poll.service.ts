@@ -27,10 +27,10 @@ export class PollService {
   saveVote(payload: VotePayload): Observable<VotePayload> {
     const poll$ = this.getPoll(payload.pollId).pipe(first());
     poll$.subscribe(poll => {
-      const options = {
-        ...poll.options,
-        [payload.option]: poll.options[payload.option] + 1
-      };
+      const options: Record<string, number> = { ...poll.options };
+      payload.options.forEach(option => {
+        options[option] = options[option] + 1;
+      });
       this.pollCollection.doc(payload.pollId).update({ options });
     });
     return of(payload);

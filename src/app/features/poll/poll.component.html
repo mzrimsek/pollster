@@ -2,7 +2,7 @@
   <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
                  [pollId]="pollId"
                  [poll]="poll$ | async"
-                 [selectedOption]="selectedOption$ | async"></app-poll-vote>
+                 [selectedOptions]="selectedOptions$ | async"></app-poll-vote>
   <app-poll-already-voted *ngIf="(voteInfo$ | async)[pollId]"
                           [voteInfo]="(voteInfo$ | async)[pollId]"></app-poll-already-voted>
 </div>

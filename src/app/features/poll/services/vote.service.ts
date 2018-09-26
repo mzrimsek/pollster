@@ -19,7 +19,7 @@ export class VoteService {
   trackVote(payload: VotePayload, votedOn = new Date().getTime()): Observable<VoteInfo> {
     const newItem: FirestoreVoteItem = {
       pollId: payload.pollId,
-      option: payload.option,
+      options: payload.options,
       votedOn
     };
     this.getUserVoteCollection(payload.userId).doc(payload.pollId).set(newItem);
@@ -37,7 +37,7 @@ export class VoteService {
 
 export interface FirestoreVoteItem {
   pollId: string;
-  option: string;
+  options: string[];
   votedOn: number;
 }
 

@@ -16,7 +16,7 @@ describe('Poll Root Reducer', () => {
             }
           },
           vote: {
-            option: ''
+            options: ''
           }
         };
         const state: State = { poll: pollState };
@@ -43,7 +43,7 @@ describe('Poll Root Reducer', () => {
             entities: {}
           },
           vote: {
-            option: 'Option'
+            options: 'Option'
           }
         };
         const state: State = { poll: pollState };

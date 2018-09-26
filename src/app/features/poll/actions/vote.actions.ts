@@ -14,12 +14,12 @@ export class VoteSucceeded implements Action {
   constructor(public payload: VotePayload) { }
 }
 
-export const SET_VOTE_OPTION = '[Vote] Set Vote Option';
-export class SetVoteOption implements Action {
-  readonly type = SET_VOTE_OPTION;
-  constructor(public option: string) { }
+export const SET_VOTE_OPTIONS = '[Vote] Set Vote Options';
+export class SetVoteOptions implements Action {
+  readonly type = SET_VOTE_OPTIONS;
+  constructor(public options: string[]) { }
 }
 
 export type All = Vote |
   VoteSucceeded |
-  SetVoteOption;
+  SetVoteOptions;

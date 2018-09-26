@@ -1,19 +1,19 @@
 import * as actions from '../actions/vote.actions';
 
 export interface State {
-  option: string;
+  options: string[];
 }
 
 const initialState: State = {
-  option: ''
+  options: []
 };
 
 export function reducer(state = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.SET_VOTE_OPTION: {
+    case actions.SET_VOTE_OPTIONS: {
       return {
         ...state,
-        option: action.option
+        options: action.options
       };
     }
     default: {
