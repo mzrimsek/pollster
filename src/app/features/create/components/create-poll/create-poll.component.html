@@ -23,7 +23,15 @@
     </ul>
   </div>
 
+  <div class="selection-mode">
+    <input type="checkbox"
+           name="selection-mode"
+           #selectionMode
+           (change)="setSelectionMode(selectionMode)"> Allow Multiple Responses
+  </div>
+
   <div class="save">
-    <button (click)="save()">Save</button>
+    <button [disabled]="info.options.length < 2 || info.title == ''"
+            (click)="save()">Save</button>
   </div>
 </div>
