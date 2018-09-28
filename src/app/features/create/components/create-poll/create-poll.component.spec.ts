@@ -106,7 +106,7 @@ describe('CreatePollComponent', () => {
     let saveButton: any;
 
     beforeEach(() => {
-      saveButton = fixture.nativeElement.querySelector('.create-poll .save button');
+      saveButton = fixture.nativeElement.querySelector('.create-poll .actions .save button');
       spyOn(component, 'getNowTime').and.returnValue(10000);
     });
 
@@ -192,6 +192,19 @@ describe('CreatePollComponent', () => {
       selectionModeElement.checked = true;
       selectionModeElement.dispatchEvent(new Event('change'));
       expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.SetMode('MULTI'));
+    });
+  });
+
+  describe('When reset button is clicked', () => {
+    let resetButton: any;
+
+    beforeEach(() => {
+      resetButton = fixture.nativeElement.querySelector('.create-poll .actions .reset button');
+    });
+
+    it('Should dispatch Clear', () => {
+      resetButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(new createPollActions.Clear());
     });
   });
 });

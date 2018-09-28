@@ -32,15 +32,24 @@
 
   <div class="selection-mode">
     <mat-checkbox name="selection-mode"
+                  [checked]="info.selectionMode === 'MULTI'"
                   #selectionMode
                   (change)="setSelectionMode(selectionMode)">Allow Multiple Responses</mat-checkbox>
 
   </div>
 
-  <div class="save">
-    <button mat-raised-button
-            color="primary"
-            [disabled]="info.options.length < 2 || info.title == ''"
-            (click)="save()">Save</button>
+  <div class="actions">
+    <div class="save">
+      <button mat-raised-button
+              color="primary"
+              [disabled]="info.options.length < 2 || info.title == ''"
+              (click)="save()">Save</button>
+    </div>
+
+    <div class="reset">
+      <button mat-raised-button
+              color="warn"
+              (click)="reset()">Reset</button>
+    </div>
   </div>
 </div>
