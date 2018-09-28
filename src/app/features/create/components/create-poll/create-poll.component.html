@@ -1,37 +1,46 @@
 <div class="create-poll">
-  <div class="title">
+  <mat-form-field class="title">
     <input type="text"
            name="title"
            id="title"
            placeholder="Poll Title"
            #title
+           matInput
            [value]="info.title"
            (change)="setTitle(title)">
-  </div>
+  </mat-form-field>
 
   <div class="add-option">
-    <input type="text"
-           placeholder="New Option"
-           #option>
-    <button (click)="addOption(option)">Add</button>
+    <mat-form-field>
+      <input type="text"
+             placeholder="New Option"
+             #option
+             matInput>
+    </mat-form-field>
+
+    <button mat-raised-button
+            color="accent"
+            (click)="addOption(option)">Add</button>
   </div>
 
   <div class="options">
-    <ul>
+    <mat-list>
       <app-create-option *ngFor="let option of info.options"
                          [option]="option"></app-create-option>
-    </ul>
+    </mat-list>
   </div>
 
   <div class="selection-mode">
-    <input type="checkbox"
-           name="selection-mode"
-           #selectionMode
-           (change)="setSelectionMode(selectionMode)"> Allow Multiple Responses
+    <mat-checkbox name="selection-mode"
+                  #selectionMode
+                  (change)="setSelectionMode(selectionMode)">Allow Multiple Responses</mat-checkbox>
+
   </div>
 
   <div class="save">
-    <button [disabled]="info.options.length < 2 || info.title == ''"
+    <button mat-raised-button
+            color="primary"
+            [disabled]="info.options.length < 2 || info.title == ''"
             (click)="save()">Save</button>
   </div>
 </div>
