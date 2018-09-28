@@ -1,7 +1,9 @@
+@import '../../../variables.scss';
+
 .home {
   header {
     overflow: hidden;
-    background: #673ab7;
+    background: $main-background;
 
     .header-section {
       text-align: center;
