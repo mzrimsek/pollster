@@ -1,0 +1,5 @@
+<mat-list-item *ngFor="let option of options">
+  <mat-checkbox name="selection-mode"
+                [value]="option"
+                (change)="emitOptionSelected(option)">{{ option }}</mat-checkbox>
+</mat-list-item>

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule, MatListModule } from '@angular/material';
 
 import { ResultsViewComponent } from './results-view.component';
 
@@ -10,7 +11,11 @@ describe('ResultsViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ResultsViewComponent]
+      declarations: [ResultsViewComponent],
+      imports: [
+        MatCardModule,
+        MatListModule
+      ]
     }).compileComponents();
   }));
 

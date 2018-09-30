@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AlreadyVotedComponent } from './already-voted.component';
+
+import { OptionsPipe } from '../../../../shared/pipes/options.pipe';
 
 describe('AlreadyVotedComponent', () => {
   let component: AlreadyVotedComponent;
@@ -9,10 +12,15 @@ describe('AlreadyVotedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AlreadyVotedComponent],
-      imports: [RouterTestingModule]
-    })
-      .compileComponents();
+      declarations: [
+        AlreadyVotedComponent,
+        OptionsPipe
+      ],
+      imports: [
+        RouterTestingModule,
+        MatCardModule
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,0 +1,9 @@
+@import '../../../../../variables.scss';
+
+.already-voted {
+  .results {
+    display: flex;
+    justify-content: center;
+    margin-top: $base-spacing*2;
+  }
+}

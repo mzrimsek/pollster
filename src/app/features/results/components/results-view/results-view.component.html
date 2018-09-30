@@ -1,10 +1,16 @@
-<div class="results-view"
-     *ngIf="poll">
-  {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
+<div *ngIf="poll"
+     class="results-view content">
+  <mat-card>
+    <mat-card-title>
+      {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
+    </mat-card-title>
 
-  <ul>
-    <li *ngFor="let option of getPollOptions()">
-      {{ option }}: {{ poll.options[option] }}
-    </li>
-  </ul>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let option of getPollOptions()">
+          {{ option }}: {{ poll.options[option] }}
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>

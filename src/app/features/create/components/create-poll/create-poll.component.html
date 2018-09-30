@@ -1,37 +1,58 @@
 <div class="create-poll">
-  <div class="title">
-    <input type="text"
-           name="title"
-           id="title"
-           placeholder="Poll Title"
-           #title
-           [value]="info.title"
-           (change)="setTitle(title)">
-  </div>
+  <mat-card>
+    <mat-form-field class="title">
+      <input type="text"
+             name="title"
+             id="title"
+             placeholder="Poll Title"
+             #title
+             matInput
+             [value]="info.title"
+             (change)="setTitle(title)">
+    </mat-form-field>
 
-  <div class="add-option">
-    <input type="text"
-           placeholder="New Option"
-           #option>
-    <button (click)="addOption(option)">Add</button>
-  </div>
+    <div class="add-option">
+      <mat-form-field>
+        <input type="text"
+               placeholder="New Option"
+               #option
+               matInput>
+      </mat-form-field>
 
-  <div class="options">
-    <ul>
-      <app-create-option *ngFor="let option of info.options"
-                         [option]="option"></app-create-option>
-    </ul>
-  </div>
+      <button mat-raised-button
+              color="accent"
+              (click)="addOption(option)">Add</button>
+    </div>
 
-  <div class="selection-mode">
-    <input type="checkbox"
-           name="selection-mode"
-           #selectionMode
-           (change)="setSelectionMode(selectionMode)"> Allow Multiple Responses
-  </div>
+    <div *ngIf="info.options.length > 0"
+         class="options">
+      <mat-list>
+        <app-create-option *ngFor="let option of info.options"
+                           [option]="option"></app-create-option>
+      </mat-list>
+    </div>
 
-  <div class="save">
-    <button [disabled]="info.options.length < 2 || info.title == ''"
-            (click)="save()">Save</button>
-  </div>
+    <div class="selection-mode">
+      <mat-checkbox name="selection-mode"
+                    [checked]="info.selectionMode === 'MULTI'"
+                    #selectionMode
+                    (change)="setSelectionMode(selectionMode)">Allow Multiple Responses</mat-checkbox>
+
+    </div>
+
+    <div class="actions">
+      <div class="save">
+        <button mat-raised-button
+                color="primary"
+                [disabled]="info.options.length < 2 || info.title == ''"
+                (click)="save()">Save</button>
+      </div>
+
+      <div class="reset">
+        <button mat-raised-button
+                color="warn"
+                (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </mat-card>
 </div>

@@ -1,29 +1,27 @@
-<div class="vote"
-     *ngIf="poll">
-  {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
+<div *ngIf="poll"
+     class="vote content">
+  <mat-card>
+    <mat-card-title>
+      {{ poll.title }} by {{ poll.createdByName }} on {{ poll.createdAt | date:'short' }}
+    </mat-card-title>
 
-  <ul class="options">
-    <li *ngFor="let option of getPollOptions()">
-      <div *ngIf="poll.selectionMode === 'SINGLE'"
-           class="option">
-        <input type="radio"
-               name="options"
-               [value]="option"
-               ([ngModel])="selectedOptions[0]"
-               (change)="setOptions(option)"> {{ option }}
-      </div>
+    <mat-card-content>
+      <mat-list class="options">
+        <div *ngIf="poll.selectionMode === 'SINGLE'">
+          <app-poll-single-option [options]="getPollOptions()"
+                                  (optionSelected)="setOptions($event)"></app-poll-single-option>
+        </div>
 
-      <div *ngIf="poll.selectionMode === 'MULTI'"
-           class="option">
-        <input type="checkbox"
-               name="options"
-               [value]="option"
-               ([ngModel])="selectedOptions.indexOf(option) !== -1"
-               (change)="setOptions(option)"> {{ option }}
-      </div>
-    </li>
-  </ul>
+        <div *ngIf="poll.selectionMode === 'MULTI'">
+          <app-poll-multi-option [options]="getPollOptions()"
+                                 (optionSelected)="setOptions($event)"></app-poll-multi-option>
+        </div>
+      </mat-list>
 
-  <button [disabled]="selectedOptions.length === 0"
-          (click)="vote()">Vote</button>
+      <button mat-raised-button
+              color="primary"
+              [disabled]="selectedOptions.length === 0"
+              (click)="vote()">Vote</button>
+    </mat-card-content>
+  </mat-card>
 </div>

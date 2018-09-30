@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule, MatListModule } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
 import { ResultsViewComponent } from './components/results-view/results-view.component';
@@ -22,6 +23,10 @@ describe('ResultsComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: routing.activatedRouteStub },
         { provide: PollService, useClass: poll.MockPollService }
+      ],
+      imports: [
+        MatCardModule,
+        MatListModule
       ]
     }).compileComponents();
   }));
