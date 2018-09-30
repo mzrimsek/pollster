@@ -11,6 +11,8 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
 import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
+import { MultiOptionComponent } from './components/multi-option/multi-option.component';
+import { SingleOptionComponent } from './components/single-option/single-option.component';
 import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
 
@@ -20,9 +22,9 @@ import { VoteEffects } from './effects/vote.effects';
 import { PollService } from '../../shared/services/poll.service';
 import { VoteService } from './services/vote.service';
 
+import { OptionsPipe } from '../../shared/pipes/options.pipe';
+
 import { reducers } from './reducers/root.reducer';
-import { SingleOptionComponent } from './components/single-option/single-option.component';
-import { MultiOptionComponent } from './components/multi-option/multi-option.component';
 
 @NgModule({
   imports: [
@@ -46,7 +48,8 @@ import { MultiOptionComponent } from './components/multi-option/multi-option.com
   ],
   providers: [
     PollService,
-    VoteService
+    VoteService,
+    OptionsPipe
   ]
 })
 export class PollModule { }

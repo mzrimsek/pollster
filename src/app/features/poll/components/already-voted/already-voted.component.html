@@ -1,7 +1,7 @@
 <div class="already-voted">
   <mat-card>
     <div class="caption">
-      You voted for {{ voteInfo.options }} on {{ voteInfo.votedOn | date:'short' }}
+      You voted for {{ voteInfo.options | options }} on {{ voteInfo.votedOn | date:'short' }}
     </div>
     <div class="results">
       <a mat-raised-button
