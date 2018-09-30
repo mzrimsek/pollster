@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import {
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatListModule, MatRadioModule
+} from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -18,19 +21,28 @@ import { PollService } from '../../shared/services/poll.service';
 import { VoteService } from './services/vote.service';
 
 import { reducers } from './reducers/root.reducer';
+import { SingleOptionComponent } from './components/single-option/single-option.component';
+import { MultiOptionComponent } from './components/multi-option/multi-option.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
     SharedModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatListModule,
     StoreModule.forFeature('poll', reducers),
     EffectsModule.forFeature([VoteEffects, VoteInfoEffects])
   ],
   declarations: [
     PollComponent,
     VoteComponent,
-    AlreadyVotedComponent
+    AlreadyVotedComponent,
+    SingleOptionComponent,
+    MultiOptionComponent
   ],
   providers: [
     PollService,

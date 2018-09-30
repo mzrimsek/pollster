@@ -1,0 +1,6 @@
+<mat-radio-group>
+  <mat-list-item *ngFor="let option of options">
+    <mat-radio-button [value]="option"
+                      (change)="emitOptionSelected(option)">{{ option }}</mat-radio-button>
+  </mat-list-item>
+</mat-radio-group>

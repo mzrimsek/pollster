@@ -3,3 +3,7 @@ export interface VoteInfo {
   options: string[];
   votedOn: number;
 }
+
+export interface OptionSelectedEvent {
+  option: string;
+}
