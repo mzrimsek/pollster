@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-    MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
+    MatListModule
 } from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -29,6 +30,7 @@ import { reducers } from './reducers/root.reducer';
     MatButtonModule,
     MatCheckboxModule,
     MatListModule,
+    MatCardModule,
     StoreModule.forFeature('create', reducers),
     EffectsModule.forFeature([CreatePollEffects])
   ],

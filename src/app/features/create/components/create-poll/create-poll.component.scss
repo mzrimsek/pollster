@@ -1,9 +1,26 @@
+@import '../../../../../variables.scss';
+
 .create-poll {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+  .add-option {
+    button {
+      margin-left: $base-spacing;
+    }
+  }
+
+  .options {
+    margin-bottom: $base-spacing*2;
+  }
+
   .actions {
     display: flex;
+    margin-top: $base-spacing*2;
 
     button {
-      margin-right: 8px;
+      margin-right: $base-spacing;
     }
   }
 }

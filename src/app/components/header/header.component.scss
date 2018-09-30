@@ -8,6 +8,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 8px 16px;
+    padding: $base-spacing $base-spacing*2;
   }
 }
