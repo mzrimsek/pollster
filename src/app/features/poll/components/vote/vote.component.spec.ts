@@ -1,7 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatListModule, MatRadioModule
+} from '@angular/material';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { MultiOptionComponent } from '../multi-option/multi-option.component';
+import { SingleOptionComponent } from '../single-option/single-option.component';
 import { VoteComponent } from './vote.component';
 
 import { UserService } from '../../../auth/services/user.service';
@@ -20,8 +25,17 @@ describe('VoteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VoteComponent],
+      declarations: [
+        VoteComponent,
+        SingleOptionComponent,
+        MultiOptionComponent
+      ],
       imports: [
+        MatCardModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatListModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
@@ -60,9 +74,11 @@ describe('VoteComponent', () => {
   });
 
   describe('When option is selected', () => {
-    it('Should dispatch SetVoteOption', () => {
-      const firstOption = fixture.nativeElement.querySelector('.vote .options li:first-child input');
-      firstOption.dispatchEvent(new Event('change'));
+    xit('Should dispatch SetVoteOption', () => {
+      const firstOption = fixture.nativeElement.querySelector('.vote .options app-poll-single-option:first-child');
+      firstOption.dispatchEvent(new Event('optionSelected'), {
+        option: 'Chipotle'
+      });
       expect(store.dispatch).toHaveBeenCalledWith(new voteActions.SetVoteOptions(['Chipotle']));
     });
   });

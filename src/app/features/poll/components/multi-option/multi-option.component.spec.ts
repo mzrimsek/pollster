@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCheckboxModule, MatListModule } from '@angular/material';
 
 import { MultiOptionComponent } from './multi-option.component';
 
@@ -8,7 +9,11 @@ describe('MultiOptionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MultiOptionComponent]
+      declarations: [MultiOptionComponent],
+      imports: [
+        MatCheckboxModule,
+        MatListModule
+      ]
     }).compileComponents();
   }));
 

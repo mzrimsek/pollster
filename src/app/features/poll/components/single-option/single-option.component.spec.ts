@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatListModule, MatRadioModule } from '@angular/material';
 
 import { SingleOptionComponent } from './single-option.component';
 
@@ -8,7 +9,11 @@ describe('SingleOptionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SingleOptionComponent]
+      declarations: [SingleOptionComponent],
+      imports: [
+        MatRadioModule,
+        MatListModule
+      ]
     }).compileComponents();
   }));
 

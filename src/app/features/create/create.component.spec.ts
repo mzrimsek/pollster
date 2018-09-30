@@ -1,4 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
+    MatListModule
+} from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
@@ -26,6 +31,13 @@ describe('CreateComponent', () => {
         OptionComponent
       ],
       imports: [
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatListModule,
+        MatCardModule,
+        NoopAnimationsModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'create': combineReducers(fromCreate.reducers)
