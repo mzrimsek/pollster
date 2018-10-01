@@ -20,6 +20,13 @@ export class SetVoteOptions implements Action {
   constructor(public options: string[]) { }
 }
 
+export const CLEAR = '[Vote] Clear';
+export class Clear implements Action {
+  readonly type = CLEAR;
+  constructor() { }
+}
+
 export type All = Vote |
   VoteSucceeded |
-  SetVoteOptions;
+  SetVoteOptions |
+  Clear;

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule, MatInputModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,36 +21,40 @@ import { ResultsModule } from './features/results/results.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
 
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        AuthModule,
-        SharedModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule,
-        AngularFireAuthModule,
-        StoreModule.forRoot(reducers),
-        StoreRouterConnectingModule.forRoot({
-            stateKey: 'router'
-        }),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        EffectsModule.forRoot([]),
-        HomeModule,
-        CreateModule,
-        PollModule,
-        ResultsModule
-    ],
-    providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AuthModule,
+    SharedModule,
+    MatButtonModule,
+    MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    StoreModule.forRoot(reducers),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router'
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
+    HomeModule,
+    CreateModule,
+    PollModule,
+    ResultsModule
+  ],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

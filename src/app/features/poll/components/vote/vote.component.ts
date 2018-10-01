@@ -9,6 +9,7 @@ import * as voteActions from '../../actions/vote.actions';
 import { State } from '../../reducers/vote-info.reducer';
 
 import { Poll, VotePayload } from '../../../../shared/models';
+import { OptionSelectedEvent } from '../../models';
 
 import { getOptionsFrom } from '../../../../shared/utils/option.utils';
 import { getVotes } from '../../utils/vote.utils';
@@ -35,8 +36,8 @@ export class VoteComponent implements OnInit {
     return getOptionsFrom(this.poll);
   }
 
-  setOptions(option: string) {
-    const options = getVotes(option, this.selectedOptions, this.poll.selectionMode);
+  setOptions(event: OptionSelectedEvent) {
+    const options = getVotes(event.option, this.selectedOptions, this.poll.selectionMode);
     this.store.dispatch(new voteActions.SetVoteOptions(options));
   }
 

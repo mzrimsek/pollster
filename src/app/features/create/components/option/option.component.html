@@ -1,4 +1,8 @@
-<li class="option">
-  <div class="value">{{ option.value }}</div>
-  <button (click)="removeOption()">Remove</button>
-</li>
+<mat-list-item>
+  <div class="option">
+    <div class="value">{{ option.value }}</div>
+    <button mat-raised-button
+            color="warn"
+            (click)="removeOption()">Remove</button>
+  </div>
+</mat-list-item>

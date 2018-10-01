@@ -1,15 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatListModule, MatRadioModule
+} from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
+import { MultiOptionComponent } from './components/multi-option/multi-option.component';
+import { SingleOptionComponent } from './components/single-option/single-option.component';
 import { VoteComponent } from './components/vote/vote.component';
 import { PollComponent } from './poll.component';
 
 import { PollService } from '../../shared/services/poll.service';
 import { UserService } from '../auth/services/user.service';
+
+import { OptionsPipe } from '../../shared/pipes/options.pipe';
 
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromPoll from './reducers/root.reducer';
@@ -27,9 +34,17 @@ describe('PollComponent', () => {
       declarations: [
         PollComponent,
         VoteComponent,
-        AlreadyVotedComponent
+        AlreadyVotedComponent,
+        SingleOptionComponent,
+        MultiOptionComponent,
+        OptionsPipe
       ],
       imports: [
+        MatCardModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatListModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)

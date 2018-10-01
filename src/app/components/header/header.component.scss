@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+
+.header {
+  color: white;
+  background: $main-background;
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $base-spacing $base-spacing*2;
+  }
+}

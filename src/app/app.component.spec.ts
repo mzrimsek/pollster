@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { combineReducers, StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
 
 import * as fromAuth from './features/auth/reducers/root.reducer';
 import * as fromCreate from './features/create/reducers/root.reducer';
@@ -26,7 +27,8 @@ describe('AppComponent', () => {
         })
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent
       ],
     }).compileComponents();
   }));

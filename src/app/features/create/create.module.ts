@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import {
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
+    MatListModule
+} from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -21,6 +25,12 @@ import { reducers } from './reducers/root.reducer';
   imports: [
     CommonModule,
     SharedModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatCardModule,
     StoreModule.forFeature('create', reducers),
     EffectsModule.forFeature([CreatePollEffects])
   ],

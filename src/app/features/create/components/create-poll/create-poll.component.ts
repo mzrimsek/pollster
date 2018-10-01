@@ -67,6 +67,10 @@ export class CreatePollComponent implements OnInit {
     this.store.dispatch(new actions.Save(poll));
   }
 
+  reset() {
+    this.store.dispatch(new actions.Clear());
+  }
+
   getNowTime(): number {
     return new Date().getTime();
   }
