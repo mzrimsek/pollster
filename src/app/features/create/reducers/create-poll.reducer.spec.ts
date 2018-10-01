@@ -71,6 +71,7 @@ describe('Create Poll Reducer', () => {
       title: 'Some Title',
       selectionMode: 'MULTI',
       validUntil: 1000000,
+      hasEnd: true,
       ids: [1],
       entities: {
         1: {
@@ -82,6 +83,14 @@ describe('Create Poll Reducer', () => {
     const newState = reducer(currentState, new actions.Clear());
     expect(newState).toEqual(initialState);
   });
+
+  it('Shouldset hasEnd when SetHasEnd is dispatched', () => {
+    const newState = reducer(initialState, new actions.SetHasEnd(true));
+    expect(newState).toEqual({
+      ...initialState,
+      hasEnd: true
+    });
+  });
 });
 
 const initialState: State = {
@@ -89,5 +98,6 @@ const initialState: State = {
   entities: {},
   title: '',
   selectionMode: 'SINGLE',
-  validUntil: null
+  validUntil: null,
+  hasEnd: false
 };

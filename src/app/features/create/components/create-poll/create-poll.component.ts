@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { Store } from '@ngrx/store';
 
+import { endOfDay } from 'date-fns';
+
 import { UserService } from '../../../auth/services/user.service';
 
 import * as actions from '../../actions/create-poll.actions';
@@ -21,6 +23,8 @@ import { CreatePollInfo } from '../../models';
 export class CreatePollComponent implements OnInit {
 
   @Input() info: CreatePollInfo;
+  @Input() hasEnd = false;
+  now = new Date();
   private optionId = 1;
   private user: User;
   constructor(private store: Store<State>, private userService: UserService) { }
@@ -49,6 +53,11 @@ export class CreatePollComponent implements OnInit {
     this.store.dispatch(new actions.SetMode(selectionMode));
   }
 
+  setValidUntil(validUntilEl: HTMLInputElement) {
+    const endTime = endOfDay(validUntilEl.value).getTime();
+    this.store.dispatch(new actions.SetValidUntil(endTime));
+  }
+
   save() {
     const optionsRecord: Record<string, number> = {};
     this.info.options.forEach((option) => {
@@ -73,5 +82,17 @@ export class CreatePollComponent implements OnInit {
 
   getNowTime(): number {
     return new Date().getTime();
+  }
+
+  toggleHasEnd() {
+    if (this.hasEnd) {
+      this.store.dispatch(new actions.SetValidUntil(null));
+    }
+    this.store.dispatch(new actions.SetHasEnd(!this.hasEnd));
+  }
+
+  isSaveDisabled(): boolean {
+    const invalidEnd = this.hasEnd && this.info.validUntil === null;
+    return this.info.options.length < 2 || this.info.title === '' || invalidEnd;
   }
 }

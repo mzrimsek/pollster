@@ -1,3 +1,4 @@
 <div class="create">
-  <app-create-create-poll [info]="createPollInfo$ | async"></app-create-create-poll>
+  <app-create-create-poll [info]="createPollInfo$ | async"
+                          [hasEnd]="pollHasEnd$ | async"></app-create-create-poll>
 </div>
