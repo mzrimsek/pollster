@@ -1,8 +1,11 @@
 <div class="poll">
-  <app-poll-vote *ngIf="!(voteInfo$ | async)[pollId]"
+  <app-poll-vote *ngIf="(canVote$ | async) && !(isInvalid$ | async)"
                  [pollId]="pollId"
                  [poll]="poll$ | async"
                  [selectedOptions]="selectedOptions$ | async"></app-poll-vote>
-  <app-poll-already-voted *ngIf="(voteInfo$ | async)[pollId]"
+  <app-poll-already-voted *ngIf="!(canVote$ | async)"
                           [voteInfo]="(voteInfo$ | async)[pollId]"></app-poll-already-voted>
+
+  <app-poll-expired *ngIf="(canVote$ | async) && (isInvalid$ | async)"
+                    [pollId]="pollId"></app-poll-expired>
 </div>
