@@ -12,4 +12,14 @@ describe('Vote Reducer', () => {
       options: ['Chipotle']
     });
   });
+
+  it('Should reset options when Clear is dispatched', () => {
+    const initialState: State = {
+      options: ['Option 1', 'Option 2']
+    };
+    const newState = reducer(initialState, new actions.Clear());
+    expect(newState).toEqual({
+      options: []
+    });
+  });
 });

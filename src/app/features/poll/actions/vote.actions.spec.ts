@@ -38,4 +38,11 @@ describe('Vote Actions', () => {
       expect(action.options).toEqual(['Option']);
     });
   });
+
+  describe('Clear', () => {
+    it('Should have correct type', () => {
+      const action = new actions.Clear();
+      expect(action.type).toBe(actions.CLEAR);
+    });
+  });
 });

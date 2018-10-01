@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 import { PollService } from '../../../shared/services/poll.service';
 
@@ -24,7 +24,10 @@ export class VoteEffects {
         map(action => action.payload),
         switchMap(payload => this.pollService.saveVote(payload)
           .pipe(
-            map(data => new voteActions.VoteSucceeded(data)),
+            mergeMap(data => [
+              new voteActions.VoteSucceeded(data),
+              new voteActions.Clear()
+            ]),
             catchError(err => of(new appActions.Error(voteActions.VOTE, err.message))))));
 
   @Effect() voteSucceeded$ =
