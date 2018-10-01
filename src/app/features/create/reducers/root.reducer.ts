@@ -28,9 +28,11 @@ export const _selectCreatePollInfo = createSelector(_selectCreatePoll, _selectOp
     options
   };
 });
+export const _selectPollHasEnd = createSelector(_selectCreatePoll, createPoll => createPoll.hasEnd);
 
 const createSelectors = {
-  createPollInfo: _selectCreatePollInfo
+  createPollInfo: _selectCreatePollInfo,
+  pollHasEnd: _selectPollHasEnd
 };
 
 export default createSelectors;

@@ -11,6 +11,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
 import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
+import { ExpiredComponent } from './components/expired/expired.component';
 import { MultiOptionComponent } from './components/multi-option/multi-option.component';
 import { SingleOptionComponent } from './components/single-option/single-option.component';
 import { VoteComponent } from './components/vote/vote.component';
@@ -44,7 +45,8 @@ import { reducers } from './reducers/root.reducer';
     VoteComponent,
     AlreadyVotedComponent,
     SingleOptionComponent,
-    MultiOptionComponent
+    MultiOptionComponent,
+    ExpiredComponent
   ],
   providers: [
     PollService,

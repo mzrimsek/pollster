@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
-    MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
-    MatListModule
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule,
+    MatInputModule, MatListModule, MatNativeDateModule, MatSlideToggleModule
 } from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -31,6 +31,9 @@ import { reducers } from './reducers/root.reducer';
     MatCheckboxModule,
     MatListModule,
     MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
     StoreModule.forFeature('create', reducers),
     EffectsModule.forFeature([CreatePollEffects])
   ],

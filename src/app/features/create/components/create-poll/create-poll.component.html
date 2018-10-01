@@ -40,11 +40,27 @@
 
     </div>
 
+    <div class="valid-until">
+      <mat-slide-toggle [checked]="hasEnd"
+                        (change)="toggleHasEnd()">Set Poll End</mat-slide-toggle>
+      <mat-form-field *ngIf="hasEnd">
+        <input matInput
+               [min]="now"
+               [matDatepicker]="picker"
+               placeholder="Choose a date"
+               #validUntil
+               (dateChange)="setValidUntil(validUntil)">
+        <mat-datepicker-toggle matSuffix
+                               [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
     <div class="actions">
       <div class="save">
         <button mat-raised-button
                 color="primary"
-                [disabled]="info.options.length < 2 || info.title == ''"
+                [disabled]="isSaveDisabled()"
                 (click)="save()">Save</button>
       </div>
 

@@ -11,6 +11,7 @@ export interface State extends EntityState<OptionEntity> {
   title: string;
   selectionMode: string;
   validUntil: number | null;
+  hasEnd: boolean;
 }
 
 export const adapter: EntityAdapter<OptionEntity> = createEntityAdapter<OptionEntity>();
@@ -18,6 +19,7 @@ const initialState: State = adapter.getInitialState({
   title: '',
   selectionMode: 'SINGLE',
   validUntil: null,
+  hasEnd: false
 });
 
 export function reducer(state = initialState, action: actions.All): State {
@@ -51,6 +53,12 @@ export function reducer(state = initialState, action: actions.All): State {
     }
     case actions.CLEAR: {
       return initialState;
+    }
+    case actions.SET_HAS_END: {
+      return {
+        ...state,
+        hasEnd: action.hasEnd
+      };
     }
     default: {
       return state;

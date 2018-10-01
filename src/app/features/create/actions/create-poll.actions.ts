@@ -44,10 +44,17 @@ export class Clear implements Action {
   constructor() { }
 }
 
+export const SET_HAS_END = '[Create Poll] Set Has End';
+export class SetHasEnd implements Action {
+  readonly type = SET_HAS_END;
+  constructor(public hasEnd: boolean) { }
+}
+
 export type All = SetTitle |
   AddOption |
   RemoveOption |
   SetMode |
   SetValidUntil |
   Save |
-  Clear;
+  Clear |
+  SetHasEnd;
