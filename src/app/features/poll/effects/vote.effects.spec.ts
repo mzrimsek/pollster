@@ -38,8 +38,9 @@ describe('Vote Effects', () => {
 
     it('Should dispatch SendVoteSucceeded', () => {
       actions = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: new voteActions.VoteSucceeded(vote.testPayload)
+      const expected = cold('-(bc)', {
+        b: new voteActions.VoteSucceeded(vote.testPayload),
+        c: new voteActions.Clear()
       });
 
       expect(effects.vote$).toBeObservable(expected);

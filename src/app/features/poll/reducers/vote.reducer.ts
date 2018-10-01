@@ -16,6 +16,9 @@ export function reducer(state = initialState, action: actions.All): State {
         options: action.options
       };
     }
+    case actions.CLEAR: {
+      return initialState;
+    }
     default: {
       return state;
     }
