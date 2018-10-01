@@ -26,4 +26,12 @@ describe('MultiOptionComponent', () => {
   it('Should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should emit optionSelected when emitOptionSelected is called', () => {
+    spyOn(component.optionSelected, 'emit');
+    component.emitOptionSelected('Chipotle');
+    expect(component.optionSelected.emit).toHaveBeenCalledWith({
+      option: 'Chipotle'
+    });
+  });
 });
