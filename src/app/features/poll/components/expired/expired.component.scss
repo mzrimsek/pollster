@@ -1,0 +1,9 @@
+@import '../../../../../variables.scss';
+
+.expired {
+  .results {
+    display: flex;
+    justify-content: center;
+    margin-top: $base-spacing*2;
+  }
+}

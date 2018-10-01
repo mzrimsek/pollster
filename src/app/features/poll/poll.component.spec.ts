@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
+import { ExpiredComponent } from './components/expired/expired.component';
 import { MultiOptionComponent } from './components/multi-option/multi-option.component';
 import { SingleOptionComponent } from './components/single-option/single-option.component';
 import { VoteComponent } from './components/vote/vote.component';
@@ -35,6 +36,7 @@ describe('PollComponent', () => {
         PollComponent,
         VoteComponent,
         AlreadyVotedComponent,
+        ExpiredComponent,
         SingleOptionComponent,
         MultiOptionComponent,
         OptionsPipe
@@ -77,5 +79,13 @@ describe('PollComponent', () => {
   xit('Should call pollService getPoll with pollId from route params', () => {
     spyOn(service, 'getPoll');
     expect(service.getPoll).toHaveBeenCalledWith('Some PollId');
+  });
+
+  it('Should select voteInfo', () => {
+    expect(store.select).toHaveBeenCalledWith(fromPoll._selectVoteInfoEntities);
+  });
+
+  it('Should select selectedOption', () => {
+    expect(store.select).toHaveBeenCalledWith(fromPoll._selectVoteOption);
   });
 });

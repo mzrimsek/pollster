@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-    MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
-    MatListModule
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule,
+    MatInputModule, MatListModule, MatNativeDateModule, MatSlideToggleModule
 } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,6 +37,9 @@ describe('CreateComponent', () => {
         MatCheckboxModule,
         MatListModule,
         MatCardModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatSlideToggleModule,
         NoopAnimationsModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,

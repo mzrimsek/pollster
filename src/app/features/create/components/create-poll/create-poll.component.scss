@@ -15,6 +15,12 @@
     margin-bottom: $base-spacing*2;
   }
 
+  .valid-until {
+    display: flex;
+    flex-direction: column;
+    margin-top: $base-spacing*2;
+  }
+
   .actions {
     display: flex;
     margin-top: $base-spacing*2;

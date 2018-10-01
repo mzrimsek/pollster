@@ -16,9 +16,11 @@ import { CreatePollInfo } from './models';
 export class CreateComponent implements OnInit {
 
   createPollInfo$: Observable<CreatePollInfo>;
+  pollHasEnd$: Observable<boolean>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
     this.createPollInfo$ = this.store.select(createSelectors.createPollInfo);
+    this.pollHasEnd$ = this.store.select(createSelectors.pollHasEnd);
   }
 }

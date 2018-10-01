@@ -98,4 +98,16 @@ describe('Create Poll Actions', () => {
       expect(action.type).toBe(actions.CLEAR);
     });
   });
+
+  describe('SetHasEnd', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SetHasEnd(false);
+      expect(action.type).toBe(actions.SET_HAS_END);
+    });
+
+    it('Should have correct hasEnd', () => {
+      const action = new actions.SetHasEnd(true);
+      expect(action.hasEnd).toBe(true);
+    });
+  });
 });

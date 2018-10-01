@@ -1,6 +1,6 @@
 {
   "name": "pollster",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -29,6 +29,7 @@
     "@ngrx/store-devtools": "^6.1.0",
     "angularfire2": "^5.0.1",
     "core-js": "^2.5.4",
+    "date-fns": "^1.29.0",
     "firebase": "^5.5.0",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.0.0",
