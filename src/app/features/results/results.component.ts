@@ -6,9 +6,6 @@ import { Observable } from 'rxjs';
 import { PollService } from '../../shared/services/poll.service';
 
 import { Poll } from '../../shared/models';
-import { BarGraphConfig } from './models';
-
-import { selectColorScheme } from './utils/color-scheme.utils';
 
 @Component({
   selector: 'app-results',
@@ -18,25 +15,6 @@ import { selectColorScheme } from './utils/color-scheme.utils';
 export class ResultsComponent implements OnInit {
 
   poll$: Observable<Poll>;
-
-  config: BarGraphConfig = {
-    view: undefined,
-    colorScheme: {
-      domain: selectColorScheme('cool')
-    },
-    showLegend: false,
-    gradient: false,
-    animations: true,
-    showXAxis: true,
-    showYAxis: true,
-    showXAxisLabel: false,
-    showYAxisLabel: false,
-    showGridLines: true,
-    xAxisLabel: 'X',
-    yAxisLabel: 'Y',
-    axisTickFormatting: x => x,
-    scaleMax: 5
-  };
   constructor(private route: ActivatedRoute, private pollService: PollService) { }
 
   ngOnInit() {
