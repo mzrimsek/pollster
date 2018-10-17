@@ -6,11 +6,21 @@
     </mat-card-title>
 
     <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let option of getPollOptions()">
-          {{ option }}: {{ poll.options[option] }}
-        </mat-list-item>
-      </mat-list>
+      <ngx-charts-bar-vertical [view]="config.view"
+                               [scheme]="config.colorScheme"
+                               [results]="getPollResults()"
+                               [gradient]="config.gradient"
+                               [xAxis]="config.showXAxis"
+                               [yAxis]="config.showYAxis"
+                               [legend]="config.showLegend"
+                               [showXAxisLabel]="config.showXAxisLabel"
+                               [showYAxisLabel]="config.showYAxisLabel"
+                               [xAxisLabel]="config.xAxisLabel"
+                               [yAxisLabel]="config.yAxisLabel"
+                               [xAxisTickFormatting]="config.axisTickFormatting"
+                               [animations]="config.animations"
+                               [showGridLines]="config.showGridLines"
+                               [yScaleMax]="config.scaleMax"></ngx-charts-bar-vertical>
     </mat-card-content>
   </mat-card>
 </div>
