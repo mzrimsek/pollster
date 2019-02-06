@@ -9,6 +9,7 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { AlreadyVotedComponent } from './components/already-voted/already-voted.component';
 import { ExpiredComponent } from './components/expired/expired.component';
+import { GoToResultsComponent } from './components/go-to-results/go-to-results.component';
 import { MultiOptionComponent } from './components/multi-option/multi-option.component';
 import { SingleOptionComponent } from './components/single-option/single-option.component';
 import { VoteComponent } from './components/vote/vote.component';
@@ -39,6 +40,7 @@ describe('PollComponent', () => {
         ExpiredComponent,
         SingleOptionComponent,
         MultiOptionComponent,
+        GoToResultsComponent,
         OptionsPipe
       ],
       imports: [
@@ -47,11 +49,11 @@ describe('PollComponent', () => {
         MatCheckboxModule,
         MatRadioModule,
         MatListModule,
+        RouterTestingModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
-        }),
-        RouterTestingModule
+        })
       ],
       providers: [
         { provide: ActivatedRoute, useValue: routing.activatedRouteStub },
