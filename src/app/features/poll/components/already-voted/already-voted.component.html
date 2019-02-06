@@ -4,10 +4,7 @@
       You voted for {{ voteInfo.options | options }} on {{ voteInfo.votedOn | date:'short' }}
     </div>
     <div class="results">
-      <a mat-raised-button
-         color="accent"
-         class="mat-raised-button"
-         [routerLink]="getResultsLink()">View Results</a>
+      <app-poll-go-to-results [pollId]="voteInfo.pollId"></app-poll-go-to-results>
     </div>
   </mat-card>
 </div>
