@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { VoteInfo } from '../../models';
 
@@ -8,15 +8,8 @@ import { VoteInfo } from '../../models';
   styleUrls: ['./already-voted.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlreadyVotedComponent implements OnInit {
+export class AlreadyVotedComponent {
 
   @Input() voteInfo: VoteInfo;
   constructor() { }
-
-  ngOnInit() { }
-
-  getResultsLink(): [string] {
-    return [`/results/${this.voteInfo.pollId}`];
-  }
-
 }

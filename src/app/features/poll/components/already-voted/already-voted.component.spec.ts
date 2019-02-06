@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { GoToResultsComponent } from '../go-to-results/go-to-results.component';
 import { AlreadyVotedComponent } from './already-voted.component';
 
 import { OptionsPipe } from '../../../../shared/pipes/options.pipe';
@@ -14,6 +15,7 @@ describe('AlreadyVotedComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AlreadyVotedComponent,
+        GoToResultsComponent,
         OptionsPipe
       ],
       imports: [
@@ -38,12 +40,5 @@ describe('AlreadyVotedComponent', () => {
 
   it('Should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('getResultsLink', () => {
-    it('Should return routing information', () => {
-      const result = component.getResultsLink();
-      expect(result).toEqual(['/results/someId']);
-    });
   });
 });

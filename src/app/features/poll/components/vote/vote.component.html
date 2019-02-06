@@ -22,6 +22,8 @@
               color="primary"
               [disabled]="selectedOptions.length === 0"
               (click)="vote()">Vote</button>
+
+      <app-poll-go-to-results [pollId]="pollId"></app-poll-go-to-results>
     </mat-card-content>
   </mat-card>
 </div>

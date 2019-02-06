@@ -2,9 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
     MatButtonModule, MatCardModule, MatCheckboxModule, MatListModule, MatRadioModule
 } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { GoToResultsComponent } from '../go-to-results/go-to-results.component';
 import { MultiOptionComponent } from '../multi-option/multi-option.component';
 import { SingleOptionComponent } from '../single-option/single-option.component';
 import { VoteComponent } from './vote.component';
@@ -28,7 +30,8 @@ describe('VoteComponent', () => {
       declarations: [
         VoteComponent,
         SingleOptionComponent,
-        MultiOptionComponent
+        MultiOptionComponent,
+        GoToResultsComponent
       ],
       imports: [
         MatCardModule,
@@ -36,6 +39,7 @@ describe('VoteComponent', () => {
         MatCheckboxModule,
         MatRadioModule,
         MatListModule,
+        RouterTestingModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'poll': combineReducers(fromPoll.reducers)
