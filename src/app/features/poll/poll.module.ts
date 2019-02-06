@@ -26,6 +26,7 @@ import { VoteService } from './services/vote.service';
 import { OptionsPipe } from '../../shared/pipes/options.pipe';
 
 import { reducers } from './reducers/root.reducer';
+import { GoToResultsComponent } from './components/go-to-results/go-to-results.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { reducers } from './reducers/root.reducer';
     AlreadyVotedComponent,
     SingleOptionComponent,
     MultiOptionComponent,
-    ExpiredComponent
+    ExpiredComponent,
+    GoToResultsComponent
   ],
   providers: [
     PollService,

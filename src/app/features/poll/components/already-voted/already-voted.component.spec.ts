@@ -39,11 +39,4 @@ describe('AlreadyVotedComponent', () => {
   it('Should create', () => {
     expect(component).toBeTruthy();
   });
-
-  describe('getResultsLink', () => {
-    it('Should return routing information', () => {
-      const result = component.getResultsLink();
-      expect(result).toEqual(['/results/someId']);
-    });
-  });
 });
